@@ -32,3 +32,8 @@ deploy:
 	git push heroku
 
 .PHONY: test
+
+heroku:
+	rm -rf dist
+	npm run build
+	NODE_ENV="production" npx nodemon --exec npx babel-node server/bin/slack.js --env 

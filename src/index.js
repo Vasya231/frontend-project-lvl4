@@ -5,6 +5,7 @@ import 'regenerator-runtime/runtime';
 
 
 import '../assets/application.scss';
+// @ts-ignore
 import gon from 'gon';
 import startApp from './app.jsx';
 import { buildInitialState } from './utils';
