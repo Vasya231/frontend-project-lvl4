@@ -10,10 +10,7 @@ class Chat extends React.Component {
   render() {
     const { channels } = this.props;
     return (
-      <>
-        <div>hello</div>
-        <ChannelList channels={channels} />
-      </>
+      <ChannelList channels={channels} />
     );
   }
 }
