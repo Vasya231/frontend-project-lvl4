@@ -1,4 +1,5 @@
 import React from 'react';
+import ChannelList from './ChannelList';
 
 class Chat extends React.Component {
   constructor(props) {
@@ -7,8 +8,9 @@ class Chat extends React.Component {
   }
 
   render() {
+    const { channels } = this.props;
     return (
-      <div>Hello</div>
+      <ChannelList channels={channels} />
     );
   }
 }

@@ -7,6 +7,7 @@ import 'regenerator-runtime/runtime';
 import '../assets/application.scss';
 import gon from 'gon';
 import startApp from './app.jsx';
+import { buildInitialState } from './utils';
 
 // import faker from 'faker';
 
@@ -22,4 +23,5 @@ console.log('it works!');
 console.log('gon', gon);
 
 const chatRoot = document.getElementById('chat');
-startApp(chatRoot, {});
+const initialState = buildInitialState(gon);
+startApp(chatRoot, initialState);

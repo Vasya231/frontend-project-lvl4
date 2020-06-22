@@ -3,7 +3,8 @@ import React from 'react';
 import Chat from './components/Chat.jsx';
 
 const startApp = (rootElement, initialState) => {
-  ReactDOM.render(<Chat />, rootElement);
+  const { channels } = initialState;
+  ReactDOM.render(<Chat channels={channels} />, rootElement);
   console.log(initialState);
 };
 
