@@ -1,7 +1,9 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { configureStore } from '@reduxjs/toolkit';
-import Chat from './components/Chat.jsx';
+import { Provider } from 'react-redux';
+
+import ChannelList from 'features/channels/ChannelList';
 import rootReducer from './reducers';
 
 const startApp = (rootElement, initialState) => {
@@ -9,9 +11,12 @@ const startApp = (rootElement, initialState) => {
     reducer: rootReducer,
     preloadedState: initialState,
   });
-  console.log(store);
-  const { channels } = initialState;
-  ReactDOM.render(<Chat channels={channels} />, rootElement);
+
+  ReactDOM.render((
+    <Provider store={store}>
+      <ChannelList />
+    </Provider>
+  ), rootElement);
   console.log(initialState);
 };
 

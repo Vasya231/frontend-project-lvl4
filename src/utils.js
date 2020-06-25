@@ -7,7 +7,9 @@ const buildInitialState = (gon) => {
   const channelIds = channels.map((c) => c.id);
   const messageIds = messages.map((m) => m.id);
   return {
-    currentChannelId,
+    activeChannel: {
+      id: currentChannelId,
+    },
     channels: {
       byId: channelsById,
       ids: channelIds,

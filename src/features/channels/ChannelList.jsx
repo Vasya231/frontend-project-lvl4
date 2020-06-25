@@ -1,4 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ({
+  channels: state.channels,
+});
 
 const generateChannelElement = (channel) => {
   const { id, name } = channel;
@@ -16,4 +21,4 @@ const ChannelList = (props) => {
   );
 };
 
-export default ChannelList;
+export default connect(mapStateToProps)(ChannelList);

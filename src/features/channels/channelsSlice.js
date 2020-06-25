@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
 const channelsSlice = createSlice({
-  name: 'channelss',
+  name: 'channels',
   initialState: {
     byId: {},
     ids: [],
