@@ -14,7 +14,8 @@ env:
 settings:
   import/resolver:
     - node
-    - webpack
+    - webpack:
+      - config: webpack.config.js
 
 rules:
   import/extensions: 0

@@ -15,6 +15,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      features: `${__dirname}/src/features`,
+    },
   },
   output: {
     path: `${__dirname}/dist/public`,
