@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
 import ChannelList from 'features/channels/ChannelList';
+import MessageList from 'features/messages/MessageList';
 import rootReducer from './reducers';
 
 const startApp = (rootElement, initialState) => {
@@ -15,6 +16,7 @@ const startApp = (rootElement, initialState) => {
   ReactDOM.render((
     <Provider store={store}>
       <ChannelList />
+      <MessageList />
     </Provider>
   ), rootElement);
   console.log(initialState);
