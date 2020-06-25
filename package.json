@@ -17,6 +17,10 @@
     "start": "dist/bin/slack.js",
     "postinstall": "npm run build"
   },
+  "jest": {
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": ["node_modules", "src"]
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:hexlet-components/projects-frontend-l4-server.git"
