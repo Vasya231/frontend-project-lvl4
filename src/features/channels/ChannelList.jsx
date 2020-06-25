@@ -1,8 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
+
+const selectChannelIds = (state) => (state.channels.ids);
+const selectChannelStorage = (state) => (state.channels.byId);
+
+const selectChannels = createSelector(
+  [selectChannelIds, selectChannelStorage],
+  (ids, byId) => ids.map((id) => byId[id]),
+);
 
 const mapStateToProps = (state) => ({
-  channels: state.channels,
+  channels: selectChannels(state),
 });
 
 const generateChannelElement = (channel) => {
@@ -14,10 +23,8 @@ const generateChannelElement = (channel) => {
 
 const ChannelList = (props) => {
   const { channels } = props;
-  const { byId, ids } = channels;
-  const channelList = ids.map((id) => byId[id]);
   return (
-    <ul className="list-group col-3">{channelList.map(generateChannelElement)}</ul>
+    <ul className="list-group col-3">{channels.map(generateChannelElement)}</ul>
   );
 };
 
