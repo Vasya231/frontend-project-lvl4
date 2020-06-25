@@ -24,7 +24,7 @@ const generateChannelElement = (channel) => {
 const ChannelList = (props) => {
   const { channels } = props;
   return (
-    <ul className="list-group col-3">{channels.map(generateChannelElement)}</ul>
+    <ul className="list-group col-3 h-100">{channels.map(generateChannelElement)}</ul>
   );
 };
 

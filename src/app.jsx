@@ -17,8 +17,10 @@ const startApp = (rootElement, initialState) => {
 
   ReactDOM.render((
     <Provider store={store}>
-      <ChannelList />
-      <MessageList />
+      <div className="row">
+        <ChannelList />
+        <MessageList />
+      </div>
     </Provider>
   ), rootElement);
   console.log(initialState);
