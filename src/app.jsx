@@ -5,7 +5,9 @@ import { Provider } from 'react-redux';
 
 import ChannelList from 'features/channels/ChannelList';
 import MessageList from 'features/messages/MessageList';
+import { addMessage } from 'features/messages/messagesSlice';
 import rootReducer from './reducers';
+
 
 const startApp = (rootElement, initialState) => {
   const store = configureStore({
@@ -20,6 +22,17 @@ const startApp = (rootElement, initialState) => {
     </Provider>
   ), rootElement);
   console.log(initialState);
+  setTimeout(() => {
+    store.dispatch(addMessage({
+      message: {
+        id: 1,
+        text: 'blahblah',
+        channelId: 1,
+        author: 'Vasya',
+      },
+    }));
+    console.log('add message dispatched');
+  }, 10000);
 };
 
 export default startApp;

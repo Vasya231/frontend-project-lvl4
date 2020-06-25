@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
-const selectActiveChannelId = (state) => state.activeChannel;
+const selectActiveChannelId = (state) => state.activeChannel.id;
 const selectMessageStorage = (state) => state.messages.byId;
 const selectMessageIds = (state) => state.messages.ids;
 
