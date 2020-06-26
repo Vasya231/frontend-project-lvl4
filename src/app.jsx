@@ -27,7 +27,6 @@ const startApp = (rootElement, initialState) => {
   setTimeout(() => {
     store.dispatch(sendMessageToServer(
       {
-        id: 1,
         text: 'blahblah',
         channelId: 1,
         author: 'Vasya',

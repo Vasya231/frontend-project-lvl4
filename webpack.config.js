@@ -17,7 +17,8 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       features: `${__dirname}/src/features`,
-      routes: `${__dirname}/src/routes`,
+      routes$: `${__dirname}/src/routes.js`,
+      serverAPI$: `${__dirname}/src/serverAPI.js`,
     },
   },
   output: {

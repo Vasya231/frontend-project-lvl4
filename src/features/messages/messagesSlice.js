@@ -1,19 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import _ from 'lodash';
-import axios from 'axios';
 
-import routes from 'routes';
+import { addNewMessage } from 'serverAPI';
 
 export const sendMessageToServer = createAsyncThunk(
   'messages/messageSendingStatus',
-  async (message) => {
-    const { channelId } = message;
-    const response = await axios.post(
-      routes.channelMessagesPath(channelId),
-      { data: { attributes: { ...message } } },
-    );
-    console.log(response);
-    return { message: response.data.data.attributes };
+  async ({ text, author, channelId }) => {
+    const message = await addNewMessage(text, author, channelId);
+    return { message };
   },
 );
 

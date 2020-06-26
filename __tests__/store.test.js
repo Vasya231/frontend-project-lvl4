@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import 'regenerator-runtime/runtime';
 
 import rootReducer from '../src/reducers';
 import { addMessage } from '../src/features/messages/messagesSlice';
@@ -45,7 +46,7 @@ test('should have initial state', () => {
   });
 });
 
-test('test actions', () => {
+test('test sync actions', () => {
   store.dispatch(addChannel({ channel: newChannel }));
   store.dispatch(setActiveChannel({ id: newChannel.id }));
   store.dispatch(addMessage({ message: message1 }));
