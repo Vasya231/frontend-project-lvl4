@@ -8,6 +8,7 @@ import ChannelList from 'features/channels/ChannelList';
 import MessageList from 'features/messages/MessageList';
 import { sendMessageToServer, addMessage } from 'features/messages/messagesSlice';
 import rootReducer from './reducers';
+import NewMessageForm from './components/NewMessageForm';
 
 
 const startApp = (rootElement, initialState) => {
@@ -29,6 +30,7 @@ const startApp = (rootElement, initialState) => {
         <ChannelList />
         <MessageList />
       </div>
+      <NewMessageForm />
     </Provider>
   ), rootElement);
 
