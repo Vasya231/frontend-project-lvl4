@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import ChannelList from 'features/channels/ChannelList';
 import MessageList from 'features/messages/MessageList';
-import { addMessage } from 'features/messages/messagesSlice';
+import { sendMessageToServer } from 'features/messages/messagesSlice';
 import rootReducer from './reducers';
 
 
@@ -25,15 +25,15 @@ const startApp = (rootElement, initialState) => {
   ), rootElement);
   console.log(initialState);
   setTimeout(() => {
-    store.dispatch(addMessage({
-      message: {
+    store.dispatch(sendMessageToServer(
+      {
         id: 1,
         text: 'blahblah',
         channelId: 1,
         author: 'Vasya',
       },
-    }));
-    console.log('add message dispatched');
+    ));
+    console.log('send message dispatched');
   }, 10000);
 };
 
