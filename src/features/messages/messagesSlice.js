@@ -26,12 +26,12 @@ const messagesSlice = createSlice({
     },
   },
   extraReducers: {
-    [sendMessageToServer.fulfilled]: (state, action) => {
+    /* [sendMessageToServer.fulfilled]: (state, action) => {
       const { message } = action.payload;
       const { id } = message;
       _.set(state.byId, id, message);
       state.ids.push(id);
-    },
+    }, */
   },
 });
 
