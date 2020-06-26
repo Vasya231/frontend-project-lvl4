@@ -2,10 +2,11 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import openSocket from 'socket.io-client';
 
 import ChannelList from 'features/channels/ChannelList';
 import MessageList from 'features/messages/MessageList';
-import { sendMessageToServer } from 'features/messages/messagesSlice';
+import { sendMessageToServer, addMessage } from 'features/messages/messagesSlice';
 import rootReducer from './reducers';
 
 
@@ -13,6 +14,13 @@ const startApp = (rootElement, initialState) => {
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: initialState,
+  });
+
+  const io = openSocket();
+
+  io.on('newMessage', (data) => {
+    const { data: { attributes: newMessage } } = data;
+    store.dispatch(addMessage({ message: newMessage }));
   });
 
   ReactDOM.render((
@@ -23,7 +31,7 @@ const startApp = (rootElement, initialState) => {
       </div>
     </Provider>
   ), rootElement);
-  console.log(initialState);
+
   setTimeout(() => {
     store.dispatch(sendMessageToServer(
       {
