@@ -31,11 +31,31 @@ const generateMessageElement = (message) => {
   );
 };
 
-const MessageList = (props) => {
-  const { messages } = props;
-  return (
-    <ul className="list-group overflow-auto">{messages.map(generateMessageElement)}</ul>
-  );
-};
+class MessageList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.chatWindow = React.createRef();
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom = () => {
+    const { scrollHeight } = this.chatWindow.current;
+    this.chatWindow.current.scrollTop = scrollHeight;
+  };
+
+  render() {
+    const { messages } = this.props;
+    return (
+      <ul ref={this.chatWindow} className="list-group overflow-auto">{messages.map(generateMessageElement)}</ul>
+    );
+  }
+}
 
 export default connect(mapStateToProps)(MessageList);
