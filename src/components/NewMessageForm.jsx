@@ -10,7 +10,7 @@ class NewMessageForm extends React.Component {
   render() {
     const { username } = this.context;
     return (
-      <div>
+      <div className="mt-auto">
         <Formik
           initialValues={{ text: '' }}
           validate={({ text }) => {

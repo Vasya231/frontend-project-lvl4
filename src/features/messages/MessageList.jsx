@@ -34,7 +34,7 @@ const generateMessageElement = (message) => {
 const MessageList = (props) => {
   const { messages } = props;
   return (
-    <ul className="list-group col-7 h-100">{messages.map(generateMessageElement)}</ul>
+    <ul className="list-group overflow-auto">{messages.map(generateMessageElement)}</ul>
   );
 };
 

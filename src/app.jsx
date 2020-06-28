@@ -37,11 +37,15 @@ const startApp = ({
   ReactDOM.render((
     <Provider store={store}>
       <AppContext.Provider value={{ username }}>
-        <div className="row">
-          <ChannelList />
-          <MessageList />
+        <div className="row h-100">
+          <div className="col-3 h-100">
+            <ChannelList />
+          </div>
+          <div className="col-7 h-100 d-flex flex-column">
+            <MessageList />
+            <NewMessageForm />
+          </div>
         </div>
-        <NewMessageForm />
       </AppContext.Provider>
     </Provider>
   ), rootElement);
