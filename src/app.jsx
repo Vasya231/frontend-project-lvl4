@@ -3,6 +3,8 @@ import React from 'react';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import openSocket from 'socket.io-client';
+import faker from 'faker';
+import Cookies from 'js-cookie';
 
 import ChannelList from 'features/channels/ChannelList';
 import MessageList from 'features/messages/MessageList';
@@ -14,7 +16,6 @@ import AppContext from './components/AppContext';
 const startApp = ({
   rootElement,
   initialState,
-  username,
 }) => {
   const store = configureStore({
     reducer: rootReducer,
@@ -22,6 +23,11 @@ const startApp = ({
   });
 
   const io = openSocket();
+
+  if (!Cookies.get('chatUsername')) {
+    Cookies.set('chatUsername', faker.name.findName());
+  }
+  const username = Cookies.get('chatUsername');
 
   io.on('newMessage', (data) => {
     const { data: { attributes: newMessage } } = data;
