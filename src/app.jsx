@@ -9,9 +9,13 @@ import MessageList from 'features/messages/MessageList';
 import { sendMessageToServer, addMessage } from 'features/messages/messagesSlice';
 import rootReducer from './reducers';
 import NewMessageForm from './components/NewMessageForm';
+import AppContext from './components/AppContext';
 
-
-const startApp = (rootElement, initialState) => {
+const startApp = ({
+  rootElement,
+  initialState,
+  username,
+}) => {
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: initialState,
@@ -26,11 +30,13 @@ const startApp = (rootElement, initialState) => {
 
   ReactDOM.render((
     <Provider store={store}>
-      <div className="row">
-        <ChannelList />
-        <MessageList />
-      </div>
-      <NewMessageForm />
+      <AppContext.Provider value={{ username }}>
+        <div className="row">
+          <ChannelList />
+          <MessageList />
+        </div>
+        <NewMessageForm />
+      </AppContext.Provider>
     </Provider>
   ), rootElement);
 

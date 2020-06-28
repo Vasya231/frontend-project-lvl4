@@ -3,6 +3,8 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+import faker from 'faker';
+
 import '../assets/application.scss';
 // @ts-ignore
 import gon from 'gon';
@@ -24,4 +26,9 @@ console.log('gon', gon);
 
 const chatRoot = document.getElementById('chat');
 const initialState = buildInitialState(gon);
-startApp(chatRoot, initialState);
+const username = faker.name.findName();
+startApp({
+  rootElement: chatRoot,
+  initialState,
+  username,
+});
