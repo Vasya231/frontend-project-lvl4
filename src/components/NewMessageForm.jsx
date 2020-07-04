@@ -2,13 +2,19 @@ import React from 'react';
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
+import { connect } from 'react-redux';
 
 import { addNewMessage } from 'serverAPI';
 import AppContext from './AppContext';
 
+const mapStateToProps = (state) => ({
+  activeChannelId: state.activeChannel.id,
+});
+
 class NewMessageForm extends React.Component {
   render() {
     const { username } = this.context;
+    const { activeChannelId } = this.props;
     return (
       <div className="mt-auto">
         <Formik
@@ -20,7 +26,7 @@ class NewMessageForm extends React.Component {
             return {};
           }}
           onSubmit={async (values, { setSubmitting }) => {
-            await addNewMessage(values.text, username, 1);
+            await addNewMessage(values.text, username, activeChannelId);
             setSubmitting(false);
           }}
         >
@@ -41,4 +47,4 @@ class NewMessageForm extends React.Component {
 
 NewMessageForm.contextType = AppContext;
 
-export default NewMessageForm;
+export default connect(mapStateToProps)(NewMessageForm);
