@@ -32,7 +32,7 @@ const NewChannelModal = () => {
           >
             {({ isSubmitting }) => (
               <Form>
-                <Field name="channelName" type="text" />
+                <Field name="channelName" type="text" className="mr-2" />
                 <Button type="submit" variant="primary" disabled={isSubmitting}>
                   Add channel
                 </Button>
