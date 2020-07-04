@@ -10,7 +10,7 @@ export const addNewMessage = async (text, author, channelId) => {
   return response.data.data.attributes;
 };
 
-export const createChannel = async (name) => {
+export const addChannel = async (name) => {
   const response = await axios.post(
     routes.channelsPath(),
     { data: { attributes: { name } } },

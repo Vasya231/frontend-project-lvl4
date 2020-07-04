@@ -13,6 +13,7 @@ import { addChannel } from 'features/channels/channelsSlice';
 import rootReducer from './reducers';
 import NewMessageForm from './components/NewMessageForm';
 import AppContext from './components/AppContext';
+import NewChannelModal from './components/NewChannelModal';
 
 const startApp = ({
   rootElement,
@@ -44,12 +45,17 @@ const startApp = ({
     <Provider store={store}>
       <AppContext.Provider value={{ username }}>
         <div className="row h-100">
-          <div className="col-3 h-100">
+          <div className="col-3 h-100 d-flex flex-column">
             <ChannelList />
+            <div className="mt-auto">
+              <NewChannelModal />
+            </div>
           </div>
           <div className="col-7 h-100 d-flex flex-column">
             <MessageList />
-            <NewMessageForm />
+            <div className="mt-auto">
+              <NewMessageForm />
+            </div>
           </div>
         </div>
       </AppContext.Provider>
@@ -64,7 +70,7 @@ const startApp = ({
         author: 'Vasya',
       },
     ));
-    console.log('send message dispatched');    
+    console.log('send message dispatched');
   }, 10000);
 };
 
