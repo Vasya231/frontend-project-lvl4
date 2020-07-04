@@ -16,7 +16,6 @@ const selectChannels = createSelector(
 
 const mapStateToProps = (state) => ({
   channels: selectChannels(state),
-  activeChannel: state.activeChannel.id,
 });
 
 const actions = {
@@ -24,14 +23,9 @@ const actions = {
 };
 
 const ChannelList = (props) => {
-  const { channels, switchChannel, activeChannel } = props;
+  const { channels, switchChannel } = props;
 
-  const handleDeleteChannel = (id) => async () => {
-    await serverAPI.deleteChannel(id);
-    if (id === activeChannel) {
-      switchChannel({ id: 1 });
-    }
-  };
+  const handleDeleteChannel = (id) => () => serverAPI.deleteChannel(id);
 
   const handleSwitchChannel = (id) => () => switchChannel({ id });
 

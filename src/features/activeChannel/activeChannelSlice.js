@@ -12,6 +12,15 @@ const activeChannelSlice = createSlice({
       _.set(state, 'id', id);
     },
   },
+  extraReducers: {
+    'channels/deleteChannel': (state, action) => {
+      const { id } = action.payload;
+      const { id: currentChannelId } = state;
+      if (id === currentChannelId) {
+        _.set(state, 'id', 1);
+      }
+    },
+  },
 });
 
 export const { setActiveChannel } = activeChannelSlice.actions;

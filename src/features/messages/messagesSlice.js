@@ -32,8 +32,8 @@ const messagesSlice = createSlice({
       _.set(state.byId, id, message);
       state.ids.push(id);
     }, */
-    deleteChannel: (state, action) => {
-      const { channel: { id: deletedChannelId } } = action.payload;
+    'channels/deleteChannel': (state, action) => {
+      const { id: deletedChannelId } = action.payload;
       const messagesToDelete = _.pickBy(
         state.byId,
         ({ channelId }) => (channelId === deletedChannelId),
