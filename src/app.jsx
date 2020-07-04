@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import ChannelList from 'features/channels/ChannelList';
 import MessageList from 'features/messages/MessageList';
 import { sendMessageToServer, addMessage } from 'features/messages/messagesSlice';
+import { addChannel } from 'features/channels/channelsSlice';
 import rootReducer from './reducers';
 import NewMessageForm from './components/NewMessageForm';
 import AppContext from './components/AppContext';
@@ -32,6 +33,11 @@ const startApp = ({
   io.on('newMessage', (data) => {
     const { data: { attributes: newMessage } } = data;
     store.dispatch(addMessage({ message: newMessage }));
+  });
+
+  io.on('newChannel', (data) => {
+    const { data: { attributes: channel } } = data;
+    store.dispatch(addChannel({ channel }));
   });
 
   ReactDOM.render((
@@ -58,7 +64,7 @@ const startApp = ({
         author: 'Vasya',
       },
     ));
-    console.log('send message dispatched');
+    console.log('send message dispatched');    
   }, 10000);
 };
 
