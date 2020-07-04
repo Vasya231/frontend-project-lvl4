@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 import ChannelList from 'features/channels/ChannelList';
 import MessageList from 'features/messages/MessageList';
 import { sendMessageToServer, addMessage } from 'features/messages/messagesSlice';
-import { addChannel } from 'features/channels/channelsSlice';
+import { addChannel, deleteChannel } from 'features/channels/channelsSlice';
 import rootReducer from './reducers';
 import NewMessageForm from './components/NewMessageForm';
 import AppContext from './components/AppContext';
@@ -39,6 +39,11 @@ const startApp = ({
   io.on('newChannel', (data) => {
     const { data: { attributes: channel } } = data;
     store.dispatch(addChannel({ channel }));
+  });
+
+  io.on('removeChannel', (data) => {
+    const { data: { id } } = data;
+    store.dispatch(deleteChannel({ id }));
   });
 
   ReactDOM.render((

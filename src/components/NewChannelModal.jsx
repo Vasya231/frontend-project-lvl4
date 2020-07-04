@@ -5,7 +5,7 @@ import {
   Formik, Form, Field,
 } from 'formik';
 
-import { addChannel } from 'serverAPI';
+import serverAPI from 'serverAPI';
 
 const NewChannelModal = () => {
   const [show, setShow] = useState(false);
@@ -25,7 +25,7 @@ const NewChannelModal = () => {
           <Formik
             initialValues={{ channelName: '' }}
             onSubmit={async (values, { setSubmitting }) => {
-              await addChannel(values.channelName);
+              await serverAPI.addChannel(values.channelName);
               setSubmitting(false);
               handleClose();
             }}

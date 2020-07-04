@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
-import { addNewMessage } from 'serverAPI';
+import serverAPI from 'serverAPI';
 
 export const sendMessageToServer = createAsyncThunk(
   'messages/messageSendingStatus',
   async ({ text, author, channelId }) => {
-    const message = await addNewMessage(text, author, channelId);
+    const message = await serverAPI.addNewMessage(text, author, channelId);
     return { message };
   },
 );
@@ -32,6 +32,15 @@ const messagesSlice = createSlice({
       _.set(state.byId, id, message);
       state.ids.push(id);
     }, */
+    deleteChannel: (state, action) => {
+      const { channel: { id: deletedChannelId } } = action.payload;
+      const messagesToDelete = _.pickBy(
+        state.byId,
+        ({ channelId }) => (channelId === deletedChannelId),
+      );
+      const deletedMessagesIds = _.keys(messagesToDelete);
+      _.pullAll(state.ids, deletedMessagesIds);
+    },
   },
 });
 

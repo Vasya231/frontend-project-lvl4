@@ -4,7 +4,7 @@ import {
 } from 'formik';
 import { connect } from 'react-redux';
 
-import { addNewMessage } from 'serverAPI';
+import serverAPI from 'serverAPI';
 import AppContext from './AppContext';
 
 const mapStateToProps = (state) => ({
@@ -25,7 +25,7 @@ class NewMessageForm extends React.Component {
           return {};
         }}
         onSubmit={async (values, { setSubmitting }) => {
-          await addNewMessage(values.text, username, activeChannelId);
+          await serverAPI.addNewMessage(values.text, username, activeChannelId);
           setSubmitting(false);
         }}
       >
