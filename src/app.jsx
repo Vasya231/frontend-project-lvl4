@@ -9,8 +9,8 @@ import Cookies from 'js-cookie';
 import ChannelList from 'features/channels/ChannelList';
 import MessageList from 'features/messages/MessageList';
 import Modals from 'features/modals/Modals';
-import { sendMessageToServer, addMessage } from 'features/messages/messagesSlice';
-import { addChannel, deleteChannel } from 'features/channels/channelsSlice';
+import { addMessage } from 'features/messages/messagesSlice';
+import { addChannel, deleteChannel, renameChannel } from 'features/channels/channelsSlice';
 import rootReducer from './reducers';
 import NewMessageForm from './components/NewMessageForm';
 import AppContext from './components/AppContext';
@@ -48,6 +48,11 @@ const startApp = ({
     store.dispatch(deleteChannel({ id }));
   });
 
+  io.on('renameChannel', (data) => {
+    const { data: { attributes: channel } } = data;
+    store.dispatch(renameChannel({ channel }));
+  });
+
   ReactDOM.render((
     <Provider store={store}>
       <AppContext.Provider value={{ username }}>
@@ -70,7 +75,7 @@ const startApp = ({
     </Provider>
   ), rootElement);
 
-  setTimeout(() => {
+  /* setTimeout(() => {
     store.dispatch(sendMessageToServer(
       {
         text: 'blahblah',
@@ -79,7 +84,7 @@ const startApp = ({
       },
     ));
     console.log('send message dispatched');
-  }, 10000);
+  }, 10000); */
 };
 
 export default startApp;

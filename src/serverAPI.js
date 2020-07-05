@@ -23,4 +23,15 @@ const deleteChannel = async (id) => {
   return response.data.data;
 };
 
-export default { addNewMessage, addChannel, deleteChannel };
+const renameChannel = async (id, newName) => {
+  const response = await axios.patch(routes.channelPath(id), {
+    data: {
+      attributes: { name: newName },
+    },
+  });
+  return response.data.data;
+};
+
+export default {
+  addNewMessage, addChannel, deleteChannel, renameChannel,
+};

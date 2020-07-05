@@ -21,14 +21,21 @@ const mapStateToProps = (state) => ({
 
 const actions = {
   switchChannel: setActiveChannel,
-  openConfirmationModal: showModal,
+  openModal: showModal,
 };
 
 const ChannelList = (props) => {
-  const { channels, switchChannel, openConfirmationModal } = props;
+  const { channels, switchChannel, openModal } = props;
 
-  const handleDeleteChannel = (id) => () => openConfirmationModal({
+  const handleDeleteChannel = (id) => () => openModal({
     type: 'deleteChannelConfirmation',
+    modalProps: {
+      channelId: id,
+    },
+  });
+
+  const handleRenameChannel = (id) => () => openModal({
+    type: 'renameChannel',
     modalProps: {
       channelId: id,
     },
@@ -48,6 +55,7 @@ const ChannelList = (props) => {
           {name}
         </Button>
         {removable && <Button onClick={handleDeleteChannel(id)} variant="primary">X</Button>}
+        {removable && <Button onClick={handleRenameChannel(id)} variant="primary">Rename</Button>}
       </li>
     );
   };

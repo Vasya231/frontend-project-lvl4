@@ -19,9 +19,14 @@ const channelsSlice = createSlice({
       _.unset(state.byId, id);
       _.pull(state.ids, id);
     },
+    renameChannel(state, action) {
+      const { channel } = action.payload;
+      const { id } = channel;
+      _.set(state.byId, id, channel);
+    },
   },
 });
 
-export const { addChannel, deleteChannel } = channelsSlice.actions;
+export const { addChannel, deleteChannel, renameChannel } = channelsSlice.actions;
 
 export default channelsSlice.reducer;
