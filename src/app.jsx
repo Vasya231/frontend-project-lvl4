@@ -8,12 +8,14 @@ import Cookies from 'js-cookie';
 
 import ChannelList from 'features/channels/ChannelList';
 import MessageList from 'features/messages/MessageList';
+import Modals from 'features/modals/Modals';
 import { sendMessageToServer, addMessage } from 'features/messages/messagesSlice';
 import { addChannel, deleteChannel } from 'features/channels/channelsSlice';
 import rootReducer from './reducers';
 import NewMessageForm from './components/NewMessageForm';
 import AppContext from './components/AppContext';
 import NewChannelModal from './components/NewChannelModal';
+
 
 const startApp = ({
   rootElement,
@@ -63,6 +65,7 @@ const startApp = ({
             </div>
           </div>
         </div>
+        <Modals />
       </AppContext.Provider>
     </Provider>
   ), rootElement);

@@ -4,7 +4,8 @@ import { createSelector } from '@reduxjs/toolkit';
 import Button from 'react-bootstrap/Button';
 
 import { setActiveChannel } from 'features/activeChannel/activeChannelSlice';
-import serverAPI from 'serverAPI';
+import { showModal } from 'features/modals/modalsSlice';
+// import serverAPI from 'serverAPI';
 
 const selectChannelIds = (state) => (state.channels.ids);
 const selectChannelStorage = (state) => (state.channels.byId);
@@ -20,12 +21,18 @@ const mapStateToProps = (state) => ({
 
 const actions = {
   switchChannel: setActiveChannel,
+  openConfirmationModal: showModal,
 };
 
 const ChannelList = (props) => {
-  const { channels, switchChannel } = props;
+  const { channels, switchChannel, openConfirmationModal } = props;
 
-  const handleDeleteChannel = (id) => () => serverAPI.deleteChannel(id);
+  const handleDeleteChannel = (id) => () => openConfirmationModal({
+    type: 'deleteChannelConfirmation',
+    modalProps: {
+      channelId: id,
+    },
+  });
 
   const handleSwitchChannel = (id) => () => switchChannel({ id });
 
