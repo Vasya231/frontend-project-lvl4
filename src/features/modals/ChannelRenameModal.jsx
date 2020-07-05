@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import {
   Formik, Form, Field,
 } from 'formik';
+import i18next from 'i18next';
 
 import serverAPI from 'serverAPI';
 
@@ -14,7 +15,7 @@ const ChannelRenameModal = (props) => {
   return (
     <Modal show onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Enter new name</Modal.Title>
+        <Modal.Title>{i18next.t('renameChannelModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Formik
@@ -29,7 +30,7 @@ const ChannelRenameModal = (props) => {
             <Form>
               <Field name="channelName" type="text" className="mr-2" />
               <Button type="submit" variant="primary" disabled={isSubmitting}>
-                Rename channel
+                {i18next.t('renameChannelModal.submitButton')}
               </Button>
             </Form>
           )}

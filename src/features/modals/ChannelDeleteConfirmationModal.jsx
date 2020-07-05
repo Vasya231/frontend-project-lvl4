@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import i18next from 'i18next';
 
 import serverAPI from 'serverAPI';
 
@@ -15,14 +16,14 @@ const ChannelDeleteConfirmationModal = (props) => {
   return (
     <Modal show onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Channel deletion confirmation</Modal.Title>
+        <Modal.Title>{i18next.t('deleteChannelModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Do you really want to delete channel?
+        {i18next.t('deleteChannelModal.question')}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleClose}>Cancel</Button>
-        <Button variant="primary" onClick={handleDelete(channelId)}>Delete</Button>
+        <Button variant="primary" onClick={handleClose}>{i18next.t('deleteChannelModal.cancelButton')}</Button>
+        <Button variant="primary" onClick={handleDelete(channelId)}>{i18next.t('deleteChannelModal.deleteButton')}</Button>
       </Modal.Footer>
     </Modal>
   );

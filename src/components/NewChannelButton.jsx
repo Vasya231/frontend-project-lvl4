@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
+import i18next from 'i18next';
 
 import { showModal } from 'features/modals/modalsSlice';
 
@@ -15,7 +16,7 @@ const NewChannelModal = (props) => {
   });
   return (
     <Button className="w-100" variant="primary" onClick={handleOpenModal}>
-      Add channel
+      {i18next.t('channelsWindow.addChannelButton')}
     </Button>
   );
 };

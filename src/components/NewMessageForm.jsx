@@ -43,7 +43,7 @@ class NewMessageForm extends React.Component {
           <Form>
             <Field type="text" name="text" />
             <button type="submit" disabled={isSubmitting}>
-              Submit
+              {i18next.t('chatWindow.submit')}
             </button>
             <div>{errors.submit}</div>
           </Form>

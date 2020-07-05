@@ -54,8 +54,8 @@ const ChannelList = (props) => {
         >
           {name}
         </Button>
-        {removable && <Button onClick={handleDeleteChannel(id)} variant="primary">X</Button>}
-        {removable && <Button onClick={handleRenameChannel(id)} variant="primary">Rename</Button>}
+        {removable && <Button onClick={handleDeleteChannel(id)} variant="primary">Delete icon</Button>}
+        {removable && <Button onClick={handleRenameChannel(id)} variant="primary">Edit icon</Button>}
       </li>
     );
   };
