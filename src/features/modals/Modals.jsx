@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { showModal, hideModal } from 'features/modals/modalsSlice';
 import ChannelDeleteConfirmationModal from 'features/modals/ChannelDeleteConfirmationModal';
+import NewChannelModal from 'features/modals/NewChannelModal';
 
 const mapStateToProps = (state) => ({
   type: state.modals.type,
@@ -16,6 +17,9 @@ const actions = {
 const getModalComponent = {
   deleteChannelConfirmation: ({ channelId }, hideModalHandler) => (
     <ChannelDeleteConfirmationModal channelId={channelId} closeModal={hideModalHandler} />
+  ),
+  newChannel: (modalProps, hideModalHandler) => (
+    <NewChannelModal closeModal={hideModalHandler} />
   ),
 };
 

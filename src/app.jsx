@@ -14,7 +14,7 @@ import { addChannel, deleteChannel } from 'features/channels/channelsSlice';
 import rootReducer from './reducers';
 import NewMessageForm from './components/NewMessageForm';
 import AppContext from './components/AppContext';
-import NewChannelModal from './components/NewChannelModal';
+import NewChannelButton from './components/NewChannelButton';
 
 
 const startApp = ({
@@ -55,7 +55,7 @@ const startApp = ({
           <div className="col-3 h-100 d-flex flex-column">
             <ChannelList />
             <div className="mt-auto">
-              <NewChannelModal />
+              <NewChannelButton />
             </div>
           </div>
           <div className="col-7 h-100 d-flex flex-column">
