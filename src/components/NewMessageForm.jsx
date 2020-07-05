@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Formik, Form, Field, ErrorMessage,
+  Formik, Form, Field,
 } from 'formik';
 import { connect } from 'react-redux';
 
@@ -24,18 +24,27 @@ class NewMessageForm extends React.Component {
           }
           return {};
         }}
-        onSubmit={async (values, { setSubmitting }) => {
-          await serverAPI.addNewMessage(values.text, username, activeChannelId);
-          setSubmitting(false);
+        onSubmit={async (values, formikActions) => {
+          const { setSubmitting, resetForm, setErrors } = formikActions;
+          console.log(formikActions);
+          try {
+            await serverAPI.addNewMessage(values.text, username, activeChannelId);
+            resetForm();
+            setSubmitting(false);
+          } catch (e) {
+            setErrors({
+              submit: e.message,
+            });
+          }
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors }) => (
           <Form>
             <Field type="text" name="text" />
-            <ErrorMessage name="text" component="div" />
             <button type="submit" disabled={isSubmitting}>
               Submit
             </button>
+            <div>{errors.submit}</div>
           </Form>
         )}
       </Formik>
