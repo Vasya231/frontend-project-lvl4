@@ -3,6 +3,7 @@ import {
   Formik, Form, Field,
 } from 'formik';
 import { connect } from 'react-redux';
+import i18next from 'i18next';
 
 import serverAPI from 'serverAPI';
 import AppContext from './AppContext';
@@ -33,7 +34,7 @@ class NewMessageForm extends React.Component {
             setSubmitting(false);
           } catch (e) {
             setErrors({
-              submit: e.message,
+              submit: i18next.t('errors.network'),
             });
           }
         }}

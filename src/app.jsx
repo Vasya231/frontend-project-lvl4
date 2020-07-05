@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import openSocket from 'socket.io-client';
 import faker from 'faker';
 import Cookies from 'js-cookie';
+import i18next from 'i18next';
 
 import ChannelList from 'features/channels/ChannelList';
 import MessageList from 'features/messages/MessageList';
@@ -15,9 +16,10 @@ import rootReducer from './reducers';
 import NewMessageForm from './components/NewMessageForm';
 import AppContext from './components/AppContext';
 import NewChannelButton from './components/NewChannelButton';
+import texts from './locales';
 
 
-const startApp = ({
+const startApp = async ({
   rootElement,
   initialState,
 }) => {
@@ -51,6 +53,12 @@ const startApp = ({
   io.on('renameChannel', (data) => {
     const { data: { attributes: channel } } = data;
     store.dispatch(renameChannel({ channel }));
+  });
+
+  await i18next.init({
+    lng: 'en',
+    debug: true,
+    resources: texts,
   });
 
   ReactDOM.render((
