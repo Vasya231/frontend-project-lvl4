@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   Formik, Form, Field,
 } from 'formik';
-import { connect } from 'react-redux';
+import Button from 'react-bootstrap/Button';
 import i18next from 'i18next';
 
 import serverAPI from 'serverAPI';
@@ -48,11 +49,13 @@ class NewMessageForm extends React.Component {
       >
         {({ isSubmitting, errors }) => (
           <Form>
-            <Field type="text" name="text" />
-            <button type="submit" disabled={isSubmitting}>
-              {i18next.t('chatWindow.submit')}
-            </button>
-            <div>{errors.submit}</div>
+            <div className="input-group">
+              <Field type="text" name="text" autoComplete="off" className="form-control" />
+              <Button type="submit" disabled={isSubmitting} variant="primary">
+                {i18next.t('chatWindow.submit')}
+              </Button>
+              <div>{errors.submit}</div>
+            </div>
           </Form>
         )}
       </Formik>
