@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -11,7 +11,9 @@ const actions = { openAnotherModal: showModal };
 
 const ChannelDeleteConfirmationModal = (props) => {
   const { closeModal, channelId, openAnotherModal } = props;
+  const [isSubmitting, setSubmitting] = useState(false);
   const handleDelete = (id) => async () => {
+    setSubmitting(true);
     try {
       await serverAPI.deleteChannel(id);
       closeModal();
@@ -23,6 +25,7 @@ const ChannelDeleteConfirmationModal = (props) => {
         },
       });
     }
+    setSubmitting(false);
   };
   const handleClose = () => closeModal();
 
@@ -36,7 +39,7 @@ const ChannelDeleteConfirmationModal = (props) => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={handleClose}>{i18next.t('deleteChannelModal.cancelButton')}</Button>
-        <Button variant="primary" onClick={handleDelete(channelId)}>{i18next.t('deleteChannelModal.deleteButton')}</Button>
+        <Button disabled={isSubmitting} variant="primary" onClick={handleDelete(channelId)}>{i18next.t('deleteChannelModal.deleteButton')}</Button>
       </Modal.Footer>
     </Modal>
   );
