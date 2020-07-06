@@ -25,7 +25,7 @@ const generateMessageElement = (message) => {
   return (
     <li className="list-group-item" key={id}>
       {author}
-      :
+      {': '}
       {text}
     </li>
   );

@@ -19,6 +19,7 @@ module.exports = {
       features: `${__dirname}/src/features`,
       routes$: `${__dirname}/src/routes.js`,
       serverAPI$: `${__dirname}/src/serverAPI.js`,
+      settings$: `${__dirname}/src/settings.js`,
     },
   },
   output: {

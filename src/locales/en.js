@@ -8,6 +8,8 @@ export default {
     },
     channelsWindow: {
       addChannelButton: 'Add channel',
+      deleteChannel: 'Delete channel',
+      renameChannel: 'Rename channel',
     },
     addChannelModal: {
       addChannelButton: 'Add channel',
