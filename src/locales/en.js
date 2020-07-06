@@ -1,7 +1,7 @@
 export default {
   translation: {
     errors: {
-      network: 'Network error occured, check your internet connection.',
+      network: 'Network error has occured, check your internet connection.',
     },
     chatWindow: {
       submit: 'Send message',
@@ -13,17 +13,17 @@ export default {
     },
     addChannelModal: {
       addChannelButton: 'Add channel',
-      title: 'Enter channel name',
+      title: 'Enter new channel name',
     },
     deleteChannelModal: {
       title: 'Channel deletion confirmation',
-      question: 'Do you really want to delete channel?',
+      question: 'Do you really want to delete this channel?',
       cancelButton: 'Cancel',
       deleteButton: 'Delete',
     },
     renameChannelModal: {
       title: 'Enter new name',
-      submitButton: 'Rename channel',
+      submitButton: 'Rename',
     },
     errorMessageModal: {
       title: 'User-friendly error message',
