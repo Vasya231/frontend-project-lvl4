@@ -1,15 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import i18next from 'i18next';
 
 import serverAPI from 'serverAPI';
+import { showModal } from 'features/modals/modalsSlice';
+
+const actions = { openAnotherModal: showModal };
 
 const ChannelDeleteConfirmationModal = (props) => {
-  const { closeModal, channelId } = props;
+  const { closeModal, channelId, openAnotherModal } = props;
   const handleDelete = (id) => async () => {
-    await serverAPI.deleteChannel(id);
-    closeModal();
+    try {
+      await serverAPI.deleteChannel(id);
+      closeModal();
+    } catch (e) {
+      openAnotherModal({
+        type: 'errorMessage',
+        modalProps: {
+          errorMessage: i18next.t('errors.network'),
+        },
+      });
+    }
   };
   const handleClose = () => closeModal();
 
@@ -29,4 +42,4 @@ const ChannelDeleteConfirmationModal = (props) => {
   );
 };
 
-export default ChannelDeleteConfirmationModal;
+export default connect(null, actions)(ChannelDeleteConfirmationModal);

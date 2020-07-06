@@ -5,6 +5,7 @@ import { showModal, hideModal } from 'features/modals/modalsSlice';
 import ChannelDeleteConfirmationModal from 'features/modals/ChannelDeleteConfirmationModal';
 import NewChannelModal from 'features/modals/NewChannelModal';
 import ChannelRenameModal from 'features/modals/ChannelRenameModal';
+import ErrorMessageModal from 'features/modals/ErrorMessageModal';
 
 const mapStateToProps = (state) => ({
   type: state.modals.type,
@@ -24,6 +25,9 @@ const getModalComponent = {
   ),
   renameChannel: ({ channelId }, hideModalHandler) => (
     <ChannelRenameModal channelId={channelId} closeModal={hideModalHandler} />
+  ),
+  errorMessage: ({ errorMessage }, hideModalHandler) => (
+    <ErrorMessageModal errorMessage={errorMessage} closeModal={hideModalHandler} />
   ),
 };
 

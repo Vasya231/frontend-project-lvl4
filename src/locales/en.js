@@ -23,5 +23,9 @@ export default {
       title: 'Enter new name',
       submitButton: 'Rename channel',
     },
+    errorMessageModal: {
+      title: 'User-friendly error message',
+      okButton: 'ok',
+    },
   },
 };
