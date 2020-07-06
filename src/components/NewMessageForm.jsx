@@ -51,7 +51,7 @@ class NewMessageForm extends React.Component {
           <Form>
             <div className="input-group">
               <Field type="text" name="text" autoComplete="off" className="form-control" />
-              <Button type="submit" disabled={isSubmitting} variant="primary">
+              <Button type="submit" disabled={isSubmitting} variant="primary" className="ml-1">
                 {i18next.t('chatWindow.submit')}
               </Button>
               <div>{errors.submit}</div>
