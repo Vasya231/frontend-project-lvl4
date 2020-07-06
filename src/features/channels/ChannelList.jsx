@@ -75,7 +75,7 @@ const ChannelList = (props) => {
   };
 
   return (
-    <ul className="list-group">{channels.map(generateChannelElement)}</ul>
+    <ul className="list-group overflow-auto">{channels.map(generateChannelElement)}</ul>
   );
 };
 
