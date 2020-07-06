@@ -64,7 +64,7 @@ const startApp = async ({
   ReactDOM.render((
     <Provider store={store}>
       <AppContext.Provider value={{ username }}>
-        <div className="row h-100">
+        <div className="row h-100 pb-3">
           <div className="col-3 h-100 d-flex flex-column">
             <ChannelList />
             <div className="mt-auto">

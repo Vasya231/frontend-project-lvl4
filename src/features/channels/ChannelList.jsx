@@ -53,7 +53,7 @@ const ChannelList = (props) => {
   const generateChannelElement = (channel) => {
     const { id, name, removable } = channel;
     const dropdownElement = (
-      <DropdownButton as={ButtonGroup} id="dropdown-channel-actions">
+      <DropdownButton as={ButtonGroup} title="" id="dropdown-channel-actions">
         <Dropdown.Item onClick={handleDeleteChannel(id)} as="button">{i18next.t('channelsWindow.deleteChannel')}</Dropdown.Item>
         <Dropdown.Item onClick={handleRenameChannel(id)} as="button">{i18next.t('channelsWindow.renameChannel')}</Dropdown.Item>
       </DropdownButton>
