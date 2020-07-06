@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import {
@@ -7,9 +8,12 @@ import {
 import i18next from 'i18next';
 
 import serverAPI from 'serverAPI';
+import { showModal } from 'features/modals/modalsSlice';
+
+const actions = { openAnotherModal: showModal };
 
 const NewChannelModal = (props) => {
-  const { closeModal } = props;
+  const { closeModal, openAnotherModal } = props;
   const handleClose = () => closeModal();
 
   return (
@@ -21,9 +25,18 @@ const NewChannelModal = (props) => {
         <Formik
           initialValues={{ channelName: '' }}
           onSubmit={async (values, { setSubmitting }) => {
-            await serverAPI.addChannel(values.channelName);
-            setSubmitting(false);
-            handleClose();
+            try {
+              await serverAPI.addChannel(values.channelName);
+              setSubmitting(false);
+              handleClose();
+            } catch (e) {
+              openAnotherModal({
+                type: 'errorMessage',
+                modalProps: {
+                  errorMessage: i18next.t('errors.network'),
+                },
+              });
+            }
           }}
         >
           {({ isSubmitting }) => (
@@ -40,4 +53,4 @@ const NewChannelModal = (props) => {
   );
 };
 
-export default NewChannelModal;
+export default connect(null, actions)(NewChannelModal);
