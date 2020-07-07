@@ -12,10 +12,10 @@ import MessageList from 'features/messages/MessageList';
 import Modals from 'features/modals/Modals';
 import { addMessage } from 'features/messages/messagesSlice';
 import { addChannel, deleteChannel, renameChannel } from 'features/channels/channelsSlice';
+import NewMessageForm from 'features/messages/NewMessageForm';
+import NewChannelButton from 'features/channels/NewChannelButton';
+import AppContext from 'components/AppContext';
 import rootReducer from './reducers';
-import NewMessageForm from './components/NewMessageForm';
-import AppContext from './components/AppContext';
-import NewChannelButton from './components/NewChannelButton';
 import texts from './locales';
 
 
@@ -82,17 +82,6 @@ const startApp = async ({
       </AppContext.Provider>
     </Provider>
   ), rootElement);
-
-  /* setTimeout(() => {
-    store.dispatch(sendMessageToServer(
-      {
-        text: 'blahblah',
-        channelId: 1,
-        author: 'Vasya',
-      },
-    ));
-    console.log('send message dispatched');
-  }, 10000); */
 };
 
 export default startApp;

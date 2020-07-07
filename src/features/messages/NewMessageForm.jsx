@@ -8,7 +8,7 @@ import i18next from 'i18next';
 
 import serverAPI from 'serverAPI';
 import { showModal } from 'features/modals/modalsSlice';
-import AppContext from './AppContext';
+import AppContext from 'components/AppContext';
 
 
 const mapStateToProps = (state) => ({
@@ -47,11 +47,13 @@ class NewMessageForm extends React.Component {
           }
         }}
       >
-        {({ isSubmitting, errors }) => (
+        {({
+          isSubmitting, errors, isValid, dirty,
+        }) => (
           <Form>
             <div className="input-group">
               <Field type="text" name="text" autoComplete="off" className="form-control" />
-              <Button type="submit" disabled={isSubmitting} variant="primary" className="ml-1">
+              <Button type="submit" disabled={isSubmitting || !dirty || !isValid} variant="primary" className="ml-1">
                 {i18next.t('chatWindow.submit')}
               </Button>
               <div>{errors.submit}</div>

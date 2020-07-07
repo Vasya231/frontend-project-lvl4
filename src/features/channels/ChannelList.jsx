@@ -9,7 +9,6 @@ import i18next from 'i18next';
 
 import { setActiveChannel } from 'features/activeChannel/activeChannelSlice';
 import { showModal } from 'features/modals/modalsSlice';
-// import serverAPI from 'serverAPI';
 
 const selectChannelIds = (state) => (state.channels.ids);
 const selectChannelStorage = (state) => (state.channels.byId);
