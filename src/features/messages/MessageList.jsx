@@ -1,20 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createSelector } from '@reduxjs/toolkit';
-
-const selectActiveChannelId = (state) => state.activeChannel.id;
-const selectMessageStorage = (state) => state.messages.byId;
-const selectMessageIds = (state) => state.messages.ids;
-
-const selectVisibleMessages = createSelector(
-  [selectMessageIds, selectMessageStorage, selectActiveChannelId],
-  (ids, byId, activeChannelId) => {
-    const orderedMessages = ids.map((id) => byId[id]);
-    const visibleMessages = orderedMessages
-      .filter(({ channelId }) => channelId === activeChannelId);
-    return visibleMessages;
-  },
-);
+import { selectVisibleMessages } from 'features/messages/messagesSlice';
 
 const mapStateToProps = (state) => ({
   messages: selectVisibleMessages(state),

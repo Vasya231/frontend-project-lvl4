@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createSelector } from '@reduxjs/toolkit';
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -9,14 +8,7 @@ import i18next from 'i18next';
 
 import { setActiveChannel } from 'features/activeChannel/activeChannelSlice';
 import { showModal } from 'features/modals/modalsSlice';
-
-const selectChannelIds = (state) => (state.channels.ids);
-const selectChannelStorage = (state) => (state.channels.byId);
-
-const selectChannels = createSelector(
-  [selectChannelIds, selectChannelStorage],
-  (ids, byId) => ids.map((id) => byId[id]),
-);
+import { selectChannels } from 'features/channels/channelsSlice';
 
 const mapStateToProps = (state) => ({
   channels: selectChannels(state),

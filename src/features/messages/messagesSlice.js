@@ -1,5 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 import _ from 'lodash';
+
+const selectActiveChannelId = (state) => state.activeChannel.id;
+const selectMessageStorage = (state) => state.messages.byId;
+const selectMessageIds = (state) => state.messages.ids;
+
+export const selectVisibleMessages = createSelector(
+  [selectMessageIds, selectMessageStorage, selectActiveChannelId],
+  (ids, byId, activeChannelId) => {
+    const orderedMessages = ids.map((id) => byId[id]);
+    const visibleMessages = orderedMessages
+      .filter(({ channelId }) => channelId === activeChannelId);
+    return visibleMessages;
+  },
+);
 
 const messagesSlice = createSlice({
   name: 'messages',

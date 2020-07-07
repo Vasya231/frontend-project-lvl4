@@ -1,5 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 import _ from 'lodash';
+
+const selectChannelIds = (state) => (state.channels.ids);
+const selectChannelStorage = (state) => (state.channels.byId);
+
+export const selectChannels = createSelector(
+  [selectChannelIds, selectChannelStorage],
+  (ids, byId) => ids.map((id) => byId[id]),
+);
 
 const channelsSlice = createSlice({
   name: 'channels',
