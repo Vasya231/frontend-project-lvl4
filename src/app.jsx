@@ -67,7 +67,7 @@ const startApp = async ({
         <div className="row h-100 pb-3 d-flex">
           <div className="col-md-3 mh-100 d-flex flex-column justify-content-between channels-window">
             <ChannelList />
-            <div className="mh-25">
+            <div className="mt-1">
               <NewChannelButton />
             </div>
           </div>
