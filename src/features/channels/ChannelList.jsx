@@ -73,7 +73,7 @@ const ChannelList = (props) => {
 
   return (
     <Navbar bg="ligt" expand="md" className="h-100 d-flex flex-md-column w-100 overflow-auto">
-      <Navbar.Brand href="#home">Channels</Navbar.Brand>
+      <Navbar.Brand href="#home">{i18next.t('channelsWindow.title')}</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className="w-100">
         <Nav className="mr-auto d-flex flex-column h-100 mh-100 w-100 list-group">

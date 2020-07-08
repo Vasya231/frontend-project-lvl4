@@ -7,6 +7,7 @@ export default {
       submit: 'Send message',
     },
     channelsWindow: {
+      title: 'Channels',
       addChannelButton: 'Add channel',
       deleteChannel: 'Delete channel',
       renameChannel: 'Rename channel',
