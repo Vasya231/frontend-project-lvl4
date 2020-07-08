@@ -79,7 +79,7 @@ const ChannelList = (props) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className="h-100 w-100 navbar-body">
         <Nav className="mr-auto d-flex flex-column h-100 mh-100 w-100">
-          <div className="d-flex flex-column w-100 list-group overflow-auto">
+          <div className="d-flex flex-column h-100 w-100 list-group overflow-auto">
             {channels.map(generateChannelElement)}
           </div>
           <div className="mt-1">

@@ -9,10 +9,16 @@
     height: 70%;
   }
   .channels-window {
-    min-height: 30%;
+    min-height: 30%;    
   }
   .btn-send {
     display: none;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .channels-window {
+    height: 100%;
   }
 }
 
