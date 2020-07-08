@@ -67,13 +67,13 @@ const startApp = async ({
         <div className="row h-100 pb-3 d-flex">
           <div className="col-md-3 mh-100 d-flex flex-column justify-content-between channels-window">
             <ChannelList />
-            <div className="">
+            <div className="mh-25">
               <NewChannelButton />
             </div>
           </div>
-          <div className="col-md-9 mh-100 d-flex flex-column justify-content-between chat-window">
+          <div className="col-md-9 mh-100 d-flex flex-column justify-content-between chat-window mb-1">
             <MessageList />
-            <div className="">
+            <div className="message-form">
               <NewMessageForm />
             </div>
           </div>
