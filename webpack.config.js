@@ -18,7 +18,7 @@ module.exports = {
       components: `${__dirname}/src/components`,
       routes$: `${__dirname}/src/routes.js`,
       serverAPI$: `${__dirname}/src/serverAPI.js`,
-      settings$: `${__dirname}/src/settings.js`,
+      constants$: `${__dirname}/src/constants.js`,
     },
   },
   output: {

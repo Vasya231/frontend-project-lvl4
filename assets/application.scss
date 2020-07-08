@@ -1,1 +1,18 @@
 @import '~bootstrap/scss/bootstrap';
+
+.responsive-font {
+  @include rfs(32);
+}
+
+.chat-window {
+  min-width: 600px;
+}
+
+@include media-breakpoint-down(md) {
+  .chat-window {
+    height: 75%;
+  }
+  .channels-window {
+    height: 25%;
+  }
+}

@@ -64,16 +64,16 @@ const startApp = async ({
   ReactDOM.render((
     <Provider store={store}>
       <AppContext.Provider value={{ username }}>
-        <div className="row h-100 pb-3">
-          <div className="col-3 h-100 d-flex flex-column">
+        <div className="row h-100 pb-3 d-flex">
+          <div className="col-md-3 mh-100 d-flex flex-column justify-content-between channels-window">
             <ChannelList />
-            <div className="mt-auto">
+            <div className="">
               <NewChannelButton />
             </div>
           </div>
-          <div className="col-7 h-100 d-flex flex-column">
+          <div className="col-md-9 mh-100 d-flex flex-column justify-content-between chat-window">
             <MessageList />
-            <div className="mt-auto">
+            <div className="">
               <NewMessageForm />
             </div>
           </div>

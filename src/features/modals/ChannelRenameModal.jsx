@@ -9,7 +9,7 @@ import i18next from 'i18next';
 
 import serverAPI from 'serverAPI';
 import { showModal } from 'features/modals/modalsSlice';
-import settings from 'settings';
+import constants from 'constants';
 
 const actions = { openAnotherModal: showModal };
 
@@ -48,7 +48,7 @@ const ChannelRenameModal = (props) => {
         >
           {({ isSubmitting, isValid, dirty }) => (
             <Form>
-              <Field name="channelName" maxLength={settings.channelNameMaxLength} type="text" className="mr-2" />
+              <Field name="channelName" maxLength={constants.channelNameMaxLength} type="text" className="mr-2" />
               <Button type="submit" variant="primary" disabled={isSubmitting || !isValid || !dirty}>
                 {i18next.t('renameChannelModal.submitButton')}
               </Button>
