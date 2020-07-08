@@ -58,7 +58,7 @@ const ChannelList = (props) => {
     );
 
     return (
-      <div key={id} className="btn-group d-flex">
+      <div key={id} className="btn-group d-flex list-group-item">
         <Button
           variant={buttonVariant}
           onClick={handleSwitchChannel(id)}
@@ -76,7 +76,7 @@ const ChannelList = (props) => {
       <Navbar.Brand href="#home">Channels</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className="w-100">
-        <Nav className="mr-auto d-flex flex-column h-100 mh-100 w-100">
+        <Nav className="mr-auto d-flex flex-column h-100 mh-100 w-100 list-group">
           {channels.map(generateChannelElement)}
         </Nav>
       </Navbar.Collapse>
