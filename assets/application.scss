@@ -5,14 +5,17 @@
 }
 
 .chat-window {
-  min-width: 600px;
+  min-width: 300px;
 }
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(sm) {
   .chat-window {
     height: 75%;
   }
   .channels-window {
     height: 25%;
+  }
+  .btn-send {
+    display: none;
   }
 }
