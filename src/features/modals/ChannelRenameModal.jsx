@@ -25,6 +25,12 @@ const ChannelRenameModal = (props) => {
       <Modal.Body>
         <Formik
           initialValues={{ channelName: '' }}
+          validate={({ channelName }) => {
+            if (!channelName) {
+              return { channelName: 'Required' };
+            }
+            return {};
+          }}
           onSubmit={async (values, { setSubmitting }) => {
             try {
               await serverAPI.renameChannel(channelId, values.channelName);
@@ -40,10 +46,10 @@ const ChannelRenameModal = (props) => {
             }
           }}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, isValid, dirty }) => (
             <Form>
               <Field name="channelName" maxLength={settings.channelNameMaxLength} type="text" className="mr-2" />
-              <Button type="submit" variant="primary" disabled={isSubmitting}>
+              <Button type="submit" variant="primary" disabled={isSubmitting || !isValid || !dirty}>
                 {i18next.t('renameChannelModal.submitButton')}
               </Button>
             </Form>

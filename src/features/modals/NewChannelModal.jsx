@@ -25,6 +25,12 @@ const NewChannelModal = (props) => {
       <Modal.Body>
         <Formik
           initialValues={{ channelName: '' }}
+          validate={({ channelName }) => {
+            if (!channelName) {
+              return { channelName: 'Required' };
+            }
+            return {};
+          }}
           onSubmit={async (values, { setSubmitting }) => {
             try {
               await serverAPI.addChannel(values.channelName);
@@ -40,10 +46,10 @@ const NewChannelModal = (props) => {
             }
           }}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, isValid, dirty }) => (
             <Form>
               <Field name="channelName" type="text" maxLength={settings.channelNameMaxLength} className="mr-2" />
-              <Button type="submit" variant="primary" disabled={isSubmitting}>
+              <Button type="submit" variant="primary" disabled={isSubmitting || !isValid || !dirty}>
                 {i18next.t('addChannelModal.addChannelButton')}
               </Button>
             </Form>
