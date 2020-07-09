@@ -36,8 +36,9 @@ const messagesSlice = createSlice({
         state.byId,
         ({ channelId }) => (channelId === deletedChannelId),
       );
-      const deletedMessagesIds = _.keys(messagesToDelete);
+      const deletedMessagesIds = _.keys(messagesToDelete).map(Number);
       _.pullAll(state.ids, deletedMessagesIds);
+      deletedMessagesIds.forEach((id) => _.unset(state.byId, id));
     },
   },
 });
