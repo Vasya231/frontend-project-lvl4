@@ -5,7 +5,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
 import i18next from 'i18next';
 
 import { setActiveChannel, getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
@@ -76,16 +75,16 @@ const ChannelList = (props) => {
   return (
     <Navbar bg="ligt" expand="md" className="h-100 d-flex flex-md-column w-100">
       <Navbar.Brand href="#home">{i18next.t('channelsWindow.title')}</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav" className="h-100 w-100 navbar-body">
-        <Nav className="mr-auto d-flex flex-column h-100 mh-100 w-100">
-          <div className="d-flex flex-column h-100 w-100 list-group overflow-auto">
+      <Navbar.Toggle aria-controls="channels-navbar-nav" />
+      <Navbar.Collapse id="channels-navbar-nav" className="h-100 w-100">
+        <div className="mr-auto d-flex flex-column h-100 w-100">
+          <div className="d-flex flex-column flex-grow-1 w-100 list-group overflow-auto">
             {channels.map(generateChannelElement)}
           </div>
           <div className="mt-1">
             <NewChannelButton />
           </div>
-        </Nav>
+        </div>
       </Navbar.Collapse>
     </Navbar>
   );
