@@ -64,7 +64,7 @@ const startApp = async ({
       <AppContext.Provider value={{ username }}>
         <div className="row h-100 pb-3 d-flex">
           <ChannelsWindow />
-          <div className="col-md-9 mh-100 d-flex flex-column justify-content-between chat-window mb-1">
+          <div className="col-md-8 mh-100 d-flex flex-column justify-content-between chat-window mb-1">
             <MessageList />
             <div className="message-form">
               <NewMessageForm />

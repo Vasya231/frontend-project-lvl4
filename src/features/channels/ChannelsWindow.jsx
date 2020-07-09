@@ -29,7 +29,7 @@ const ChannelsWindow = () => {
   }
 
   return (
-    <div className="col-md-3 mh-100 d-flex flex-column justify-content-between channels-window mb-1">
+    <div className="col-md-4 mh-100 d-flex flex-column justify-content-between channels-window mb-1">
       <ChannelList />
       <div className="">
         <NewChannelButton />
