@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import _ from 'lodash';
 
 const buildInitialState = (gon) => {
@@ -21,6 +22,21 @@ const buildInitialState = (gon) => {
   };
 };
 
-const somethingElse = () => {};
+const getWindowDimensions = () => {
+  const { innerHeight: height, innerWidth: width } = window;
+  return { height, width };
+};
 
-export { buildInitialState, somethingElse };
+const useWindowDimensions = () => {
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+  useEffect(() => {
+    const resizeHandler = () => setWindowDimensions(getWindowDimensions());
+    window.addEventListener('resize', resizeHandler);
+    return () => window.removeEventListener('resize', resizeHandler);
+  });
+
+  return windowDimensions;
+};
+
+export { buildInitialState, useWindowDimensions };
