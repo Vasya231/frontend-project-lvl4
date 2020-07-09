@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 import i18next from 'i18next';
 
 import ChannelList from 'features/channels/ChannelList';
+import NewChannelButton from 'features/channels/NewChannelButton';
 import MessageList from 'features/messages/MessageList';
 import Modals from 'features/modals/Modals';
 import { addMessage } from 'features/messages/messagesSlice';
@@ -66,6 +67,9 @@ const startApp = async ({
         <div className="row h-100 pb-3 d-flex">
           <div className="col-md-3 mh-100 d-flex flex-column justify-content-between channels-window mb-1">
             <ChannelList />
+            <div className="">
+              <NewChannelButton />
+            </div>
           </div>
           <div className="col-md-9 mh-100 d-flex flex-column justify-content-between chat-window mb-1">
             <MessageList />
