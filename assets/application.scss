@@ -3,13 +3,16 @@
 .chat-window {
   min-width: 300px;
 }
+.channels-dropdown {
+  height: 60vh;
+}
 
 @include media-breakpoint-down(sm) {
   .chat-window {
-    height: 70%;
+    height: 90%;
   }
   .channels-window {
-    height: 30%;    
+    height: 10%;    
   }
   .btn-send {
     display: none;

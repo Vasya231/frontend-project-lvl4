@@ -7,8 +7,7 @@ import faker from 'faker';
 import Cookies from 'js-cookie';
 import i18next from 'i18next';
 
-import ChannelList from 'features/channels/ChannelList';
-import NewChannelButton from 'features/channels/NewChannelButton';
+import ChannelsWindow from 'features/channels/ChannelsWindow';
 import MessageList from 'features/messages/MessageList';
 import Modals from 'features/modals/Modals';
 import { addMessage } from 'features/messages/messagesSlice';
@@ -17,7 +16,6 @@ import NewMessageForm from 'features/messages/NewMessageForm';
 import AppContext from 'components/AppContext';
 import rootReducer from './reducers';
 import texts from './locales';
-
 
 const startApp = async ({
   rootElement,
@@ -65,12 +63,7 @@ const startApp = async ({
     <Provider store={store}>
       <AppContext.Provider value={{ username }}>
         <div className="row h-100 pb-3 d-flex">
-          <div className="col-md-3 mh-100 d-flex flex-column justify-content-between channels-window mb-1">
-            <ChannelList />
-            <div className="">
-              <NewChannelButton />
-            </div>
-          </div>
+          <ChannelsWindow />
           <div className="col-md-9 mh-100 d-flex flex-column justify-content-between chat-window mb-1">
             <MessageList />
             <div className="message-form">
