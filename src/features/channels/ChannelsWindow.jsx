@@ -5,7 +5,6 @@ import { useWindowDimensions } from 'utils';
 
 import ChannelList from 'features/channels/ChannelList';
 import NewChannelButton from 'features/channels/NewChannelButton';
-// import DropdownButton from 'react-bootstrap/DropdownButton';
 
 const ChannelsWindow = () => {
   const { width } = useWindowDimensions();
