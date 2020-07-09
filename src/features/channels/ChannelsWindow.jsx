@@ -21,7 +21,7 @@ const ChannelsWindow = () => {
 
   if (showDropdown) {
     return (
-      <Dropdown className="w-100 d-flex">
+      <Dropdown className="w-100 d-flex mb-1">
         <Dropdown.Toggle className="w-100" variant="success">Channels</Dropdown.Toggle>
         <Dropdown.Menu className="w-100 d-flex flex-column channels-dropdown">{content}</Dropdown.Menu>
       </Dropdown>
