@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
-import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 import { showModal } from 'features/modals/modalsSlice';
 
@@ -14,9 +14,12 @@ const NewChannelModal = (props) => {
     type: 'newChannel',
     modalProps: {},
   });
+
+  const { t } = useTranslation();
+
   return (
     <Button className="w-100" variant="primary" onClick={handleOpenModal}>
-      {i18next.t('channelsWindow.addChannelButton')}
+      {t('channelsWindow.addChannelButton')}
     </Button>
   );
 };

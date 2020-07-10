@@ -4,7 +4,7 @@ import {
   Formik, Form, Field,
 } from 'formik';
 import Button from 'react-bootstrap/Button';
-import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 import serverAPI from 'serverAPI';
 import { showModal } from 'features/modals/modalsSlice';
@@ -20,7 +20,7 @@ const actions = { openModal: showModal };
 class NewMessageForm extends React.Component {
   render() {
     const { username } = this.context;
-    const { activeChannelId, openModal } = this.props;
+    const { activeChannelId, openModal, t } = this.props;
     return (
       <Formik
         initialValues={{ text: '' }}
@@ -40,7 +40,7 @@ class NewMessageForm extends React.Component {
             openModal({
               type: 'errorMessage',
               modalProps: {
-                errorMessage: i18next.t('errors.network'),
+                errorMessage: t('errors.network'),
               },
             });
           }
@@ -53,7 +53,7 @@ class NewMessageForm extends React.Component {
             <div className="input-group mw-100">
               <Field type="text" name="text" autoComplete="off" className="form-control" />
               <Button type="submit" disabled={isSubmitting || !dirty || !isValid} variant="primary" className="ml-1 btn-send">
-                {i18next.t('chatWindow.submit')}
+                {t('chatWindow.submit')}
               </Button>
               <div>{errors.submit}</div>
             </div>
@@ -66,4 +66,4 @@ class NewMessageForm extends React.Component {
 
 NewMessageForm.contextType = AppContext;
 
-export default connect(mapStateToProps, actions)(NewMessageForm);
+export default connect(mapStateToProps, actions)(withTranslation()(NewMessageForm));

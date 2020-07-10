@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import openSocket from 'socket.io-client';
 import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
 
 import { addMessage } from 'features/messages/messagesSlice';
@@ -13,7 +14,7 @@ import AppContext from 'AppContext';
 import rootReducer from './reducers';
 import texts from './locales';
 
-const startApp = async ({
+const startApp = ({
   rootElement,
   initialState,
   username,
@@ -45,11 +46,13 @@ const startApp = async ({
     store.dispatch(renameChannel({ channel }));
   });
 
-  await i18next.init({
-    lng: 'en',
-    debug: true,
-    resources: texts,
-  });
+  i18next
+    .use(initReactI18next)
+    .init({
+      lng: 'en',
+      debug: true,
+      resources: texts,
+    });
 
   ReactDOM.render((
     <Provider store={store}>

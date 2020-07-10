@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
+import { generalChannelId } from 'constants';
+
 const activeChannelSlice = createSlice({
   name: 'activeChannel',
   initialState: {
@@ -17,7 +19,7 @@ const activeChannelSlice = createSlice({
       const { id } = action.payload;
       const { id: currentChannelId } = state;
       if (id === currentChannelId) {
-        _.set(state, 'id', 1);
+        _.set(state, 'id', generalChannelId);
       }
     },
   },

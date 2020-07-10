@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 import { setActiveChannel, getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
 import { showModal } from 'features/modals/modalsSlice';
@@ -24,6 +24,8 @@ const ChannelList = (props) => {
   const {
     activeChannelId, channels, switchChannel, openModal,
   } = props;
+
+  const { t } = useTranslation();
 
   const handleDeleteChannel = (id) => () => {
     openModal({
@@ -50,8 +52,8 @@ const ChannelList = (props) => {
     const buttonVariant = isActive ? 'success' : 'primary';
     const dropdownElement = (
       <DropdownButton as={ButtonGroup} variant={buttonVariant} title="" id="dropdown-channel-actions">
-        <Dropdown.Item onClick={handleDeleteChannel(id)} as="button">{i18next.t('channelsWindow.deleteChannel')}</Dropdown.Item>
-        <Dropdown.Item onClick={handleRenameChannel(id)} as="button">{i18next.t('channelsWindow.renameChannel')}</Dropdown.Item>
+        <Dropdown.Item onClick={handleDeleteChannel(id)} as="button">{t('channelsWindow.deleteChannel')}</Dropdown.Item>
+        <Dropdown.Item onClick={handleRenameChannel(id)} as="button">{t('channelsWindow.renameChannel')}</Dropdown.Item>
       </DropdownButton>
     );
 

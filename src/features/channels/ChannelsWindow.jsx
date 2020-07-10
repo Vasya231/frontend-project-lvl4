@@ -1,5 +1,6 @@
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useTranslation } from 'react-i18next';
 
 import { useWindowDimensions } from 'utils';
 
@@ -8,6 +9,7 @@ import NewChannelButton from 'features/channels/NewChannelButton';
 
 const ChannelsWindow = () => {
   const { width } = useWindowDimensions();
+  const { t } = useTranslation();
   const content = (
     <>
       <ChannelList />
@@ -21,7 +23,7 @@ const ChannelsWindow = () => {
   if (showDropdown) {
     return (
       <Dropdown className="w-100 d-flex mb-1">
-        <Dropdown.Toggle className="w-100" variant="success">Channels</Dropdown.Toggle>
+        <Dropdown.Toggle className="w-100" variant="success">{t('channelsWindow.title')}</Dropdown.Toggle>
         <Dropdown.Menu className="w-100 d-flex flex-column channels-dropdown">{content}</Dropdown.Menu>
       </Dropdown>
     );

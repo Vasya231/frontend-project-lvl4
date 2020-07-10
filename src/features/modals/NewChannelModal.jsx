@@ -5,22 +5,24 @@ import Button from 'react-bootstrap/Button';
 import {
   Formik, Form, Field,
 } from 'formik';
-import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 import serverAPI from 'serverAPI';
 import { showModal } from 'features/modals/modalsSlice';
-import constants from 'constants';
+import { channelNameMaxLength } from 'constants';
+
 
 const actions = { openAnotherModal: showModal };
 
 const NewChannelModal = (props) => {
   const { closeModal, openAnotherModal } = props;
   const handleClose = () => closeModal();
+  const { t } = useTranslation();
 
   return (
     <Modal show onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{i18next.t('addChannelModal.title')}</Modal.Title>
+        <Modal.Title>{t('addChannelModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Formik
@@ -40,7 +42,7 @@ const NewChannelModal = (props) => {
               openAnotherModal({
                 type: 'errorMessage',
                 modalProps: {
-                  errorMessage: i18next.t('errors.network'),
+                  errorMessage: t('errors.network'),
                 },
               });
             }
@@ -48,9 +50,9 @@ const NewChannelModal = (props) => {
         >
           {({ isSubmitting, isValid, dirty }) => (
             <Form>
-              <Field name="channelName" type="text" maxLength={constants.channelNameMaxLength} className="mr-2" />
+              <Field name="channelName" type="text" maxLength={channelNameMaxLength} className="mr-2" />
               <Button type="submit" variant="primary" disabled={isSubmitting || !isValid || !dirty}>
-                {i18next.t('addChannelModal.addChannelButton')}
+                {t('addChannelModal.addChannelButton')}
               </Button>
             </Form>
           )}
