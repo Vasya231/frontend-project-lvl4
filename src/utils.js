@@ -50,7 +50,7 @@ export const validateChannelName = ({ channelName }) => {
 };
 
 export const validateMessageText = ({ text }) => {
-  if (!text) {
+  if (!String(text).trim()) {
     return { text: 'Required' };
   }
   return {};
