@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import {
   Formik, Form, Field,
 } from 'formik';
 import Button from 'react-bootstrap/Button';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import serverAPI from 'serverAPI';
 import { showModal } from 'features/modals/modalsSlice';
 import AppContext from 'AppContext';
+import { validateMessageText } from 'utils';
 
 
 const mapStateToProps = (state) => ({
@@ -17,53 +18,45 @@ const mapStateToProps = (state) => ({
 
 const actions = { openModal: showModal };
 
-class NewMessageForm extends React.Component {
-  render() {
-    const { username } = this.context;
-    const { activeChannelId, openModal, t } = this.props;
-    return (
-      <Formik
-        initialValues={{ text: '' }}
-        validate={({ text }) => {
-          if (!text) {
-            return { text: 'Required' };
-          }
-          return {};
-        }}
-        onSubmit={async (values, formikActions) => {
-          const { setSubmitting, resetForm } = formikActions;
-          try {
-            await serverAPI.addNewMessage(values.text, username, activeChannelId);
-            resetForm();
-            setSubmitting(false);
-          } catch (error) {
-            openModal({
-              type: 'errorMessage',
-              modalProps: {
-                errorMessage: t('errors.network'),
-              },
-            });
-          }
-        }}
-      >
-        {({
-          isSubmitting, errors, isValid, dirty,
-        }) => (
-          <Form>
-            <div className="input-group mw-100">
-              <Field type="text" name="text" autoComplete="off" className="form-control" />
-              <Button type="submit" disabled={isSubmitting || !dirty || !isValid} variant="primary" className="ml-1 btn-send">
-                {t('chatWindow.submit')}
-              </Button>
-              <div>{errors.submit}</div>
-            </div>
-          </Form>
-        )}
-      </Formik>
-    );
-  }
-}
+const NewMessageForm = (props) => {
+  const { username } = useContext(AppContext);
+  const { t } = useTranslation();
+  const { activeChannelId, openModal } = props;
+  return (
+    <Formik
+      initialValues={{ text: '' }}
+      validate={validateMessageText}
+      onSubmit={async (values, formikActions) => {
+        const { setSubmitting, resetForm } = formikActions;
+        try {
+          await serverAPI.addNewMessage(values.text, username, activeChannelId);
+          resetForm();
+          setSubmitting(false);
+        } catch (error) {
+          openModal({
+            type: 'errorMessage',
+            modalProps: {
+              errorMessage: t('errors.network'),
+            },
+          });
+        }
+      }}
+    >
+      {({
+        isSubmitting, errors, isValid, dirty,
+      }) => (
+        <Form>
+          <div className="input-group mw-100">
+            <Field type="text" name="text" autoComplete="off" className="form-control" />
+            <Button type="submit" disabled={isSubmitting || !dirty || !isValid} variant="primary" className="ml-1 btn-send">
+              {t('chatWindow.submit')}
+            </Button>
+            <div>{errors.submit}</div>
+          </div>
+        </Form>
+      )}
+    </Formik>
+  );
+};
 
-NewMessageForm.contextType = AppContext;
-
-export default connect(mapStateToProps, actions)(withTranslation()(NewMessageForm));
+export default connect(mapStateToProps, actions)(NewMessageForm);

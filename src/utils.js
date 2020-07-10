@@ -39,4 +39,18 @@ const useWindowDimensions = () => {
   return windowDimensions;
 };
 
+export const validateChannelName = ({ channelName }) => {
+  if (!String(channelName).trim()) {
+    return { channelName: 'Required' };
+  }
+  return {};
+};
+
+export const validateMessageText = ({ text }) => {
+  if (!text) {
+    return { text: 'Required' };
+  }
+  return {};
+};
+
 export { buildInitialState, useWindowDimensions };

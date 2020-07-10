@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import serverAPI from 'serverAPI';
 import { showModal } from 'features/modals/modalsSlice';
 import { channelNameMaxLength } from 'constants';
+import { validateChannelName } from 'utils';
 
 
 const actions = { openAnotherModal: showModal };
@@ -27,15 +28,11 @@ const NewChannelModal = (props) => {
       <Modal.Body>
         <Formik
           initialValues={{ channelName: '' }}
-          validate={({ channelName }) => {
-            if (!channelName) {
-              return { channelName: 'Required' };
-            }
-            return {};
-          }}
-          onSubmit={async (values, { setSubmitting }) => {
+          validate={validateChannelName}
+          onSubmit={async ({ channelName }, { setSubmitting }) => {
+            const normalizedChannelName = channelName.trim();
             try {
-              await serverAPI.addChannel(values.channelName);
+              await serverAPI.addChannel(normalizedChannelName);
               setSubmitting(false);
               handleClose();
             } catch (e) {
