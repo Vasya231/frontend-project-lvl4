@@ -1,7 +1,7 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
-import { selectActiveChannelId } from 'features/activeChannel/activeChannelSlice';
+import { getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
 
 export const selectMessageStorage = (state) => state.messages.byId;
 export const selectMessageIds = (state) => state.messages.ids;
@@ -12,7 +12,7 @@ export const selectOrderedMessages = createSelector(
 );
 
 export const selectVisibleMessages = createSelector(
-  [selectOrderedMessages, selectActiveChannelId],
+  [selectOrderedMessages, getActiveChannelId],
   (orderedMessages, activeChannelId) => orderedMessages
     .filter(({ channelId }) => channelId === activeChannelId),
 );

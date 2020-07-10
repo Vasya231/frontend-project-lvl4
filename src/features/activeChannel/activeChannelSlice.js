@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
-export const selectActiveChannelId = (state) => state.activeChannel.id;
-
 const activeChannelSlice = createSlice({
   name: 'activeChannel',
   initialState: {
