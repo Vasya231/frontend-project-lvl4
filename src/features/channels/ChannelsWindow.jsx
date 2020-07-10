@@ -29,7 +29,11 @@ const ChannelsWindow = (props) => {
     return (
       <Dropdown className="w-100 d-flex mb-1">
         <Dropdown.Toggle className="w-100" variant="success">{activeChannelName}</Dropdown.Toggle>
-        <Dropdown.Menu className="w-100 d-flex flex-column channels-dropdown">{content}</Dropdown.Menu>
+        <Dropdown.Menu className="w-100 d-flex flex-column vh-100">
+          <div className="d-flex flex-column h-75">
+            {content}
+          </div>
+        </Dropdown.Menu>
       </Dropdown>
     );
   }
