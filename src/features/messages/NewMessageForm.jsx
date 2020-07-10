@@ -8,7 +8,7 @@ import i18next from 'i18next';
 
 import serverAPI from 'serverAPI';
 import { showModal } from 'features/modals/modalsSlice';
-import AppContext from 'components/AppContext';
+import AppContext from 'AppContext';
 
 
 const mapStateToProps = (state) => ({
@@ -32,7 +32,6 @@ class NewMessageForm extends React.Component {
         }}
         onSubmit={async (values, formikActions) => {
           const { setSubmitting, resetForm } = formikActions;
-          console.log(formikActions);
           try {
             await serverAPI.addNewMessage(values.text, username, activeChannelId);
             resetForm();

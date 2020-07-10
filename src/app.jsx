@@ -9,7 +9,7 @@ import i18next from 'i18next';
 import { addMessage } from 'features/messages/messagesSlice';
 import { addChannel, deleteChannel, renameChannel } from 'features/channels/channelsSlice';
 import App from 'components/App';
-import AppContext from 'components/AppContext';
+import AppContext from 'AppContext';
 import rootReducer from './reducers';
 import texts from './locales';
 
