@@ -17,8 +17,7 @@ const channelsSlice = createSlice({
   },
   reducers: {
     addChannel(state, action) {
-      const { channel } = action.payload;
-      const { id } = channel;
+      const { channel, channel: { id } } = action.payload;
       _.set(state.byId, id, channel);
       state.ids.push(id);
     },
