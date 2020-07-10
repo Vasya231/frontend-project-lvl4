@@ -33,15 +33,17 @@ test('should have initial state', () => {
   const state = store.getState();
   expect(state).toMatchObject({
     activeChannel: {
-      id: 0,
+      id: null,
     },
-    channels: {
-      byId: {},
-      ids: [],
-    },
-    messages: {
-      byId: {},
-      ids: [],
+    entities: {
+      channels: {
+        byId: {},
+        ids: [],
+      },
+      messages: {
+        byId: {},
+        ids: [],
+      },
     },
   });
 });
@@ -56,18 +58,20 @@ test('test sync actions', () => {
     activeChannel: {
       id: newChannel.id,
     },
-    channels: {
-      byId: {
-        [newChannel.id]: newChannel,
+    entities: {
+      channels: {
+        byId: {
+          [newChannel.id]: newChannel,
+        },
+        ids: [newChannel.id],
       },
-      ids: [newChannel.id],
-    },
-    messages: {
-      byId: {
-        [message1.id]: message1,
-        [message2.id]: message2,
+      messages: {
+        byId: {
+          [message1.id]: message1,
+          [message2.id]: message2,
+        },
+        ids: [message1.id, message2.id],
       },
-      ids: [message1.id, message2.id],
     },
   });
 });
