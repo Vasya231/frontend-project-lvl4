@@ -1,27 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
 
-.chat-window {
-  min-width: 300px;
-}
-
 .channels-dropdown {
-  height: 60vh;
+  max-height: 60vh;
 }
 
-@include media-breakpoint-down(sm) {
-  .chat-window {
-    height: 90%;
-  }
-  .channels-window {
-    height: 10%;    
-  }
-  .btn-send {
-    display: none;
-  }
+.h-10 {
+  height: 10%;
 }
 
-@include media-breakpoint-up(md) {
-  .channels-window {
-    height: 100%;
-  }
+.h-90 {
+  height: 90%;
 }

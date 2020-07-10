@@ -1,12 +1,19 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
+import { getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
+
 const selectChannelIds = (state) => (state.channels.ids);
 const selectChannelStorage = (state) => (state.channels.byId);
 
 export const selectChannels = createSelector(
   [selectChannelIds, selectChannelStorage],
   (ids, byId) => ids.map((id) => byId[id]),
+);
+
+export const getActiveChannelName = createSelector(
+  [getActiveChannelId, selectChannelStorage],
+  (id, byId) => byId[id].name,
 );
 
 const channelsSlice = createSlice({

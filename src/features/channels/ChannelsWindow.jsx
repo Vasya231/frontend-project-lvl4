@@ -1,15 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { useTranslation } from 'react-i18next';
 
 import { useWindowDimensions } from 'utils';
 
 import ChannelList from 'features/channels/ChannelList';
 import NewChannelButton from 'features/channels/NewChannelButton';
+import { getActiveChannelName } from 'features/channels/channelsSlice';
 
-const ChannelsWindow = () => {
+const mapStateToProps = (state) => ({
+  activeChannelName: getActiveChannelName(state),
+});
+
+const ChannelsWindow = (props) => {
   const { width } = useWindowDimensions();
-  const { t } = useTranslation();
+  const { activeChannelName } = props;
   const content = (
     <>
       <ChannelList />
@@ -23,7 +28,7 @@ const ChannelsWindow = () => {
   if (showDropdown) {
     return (
       <Dropdown className="w-100 d-flex mb-1">
-        <Dropdown.Toggle className="w-100" variant="success">{t('channelsWindow.title')}</Dropdown.Toggle>
+        <Dropdown.Toggle className="w-100" variant="success">{activeChannelName}</Dropdown.Toggle>
         <Dropdown.Menu className="w-100 d-flex flex-column channels-dropdown">{content}</Dropdown.Menu>
       </Dropdown>
     );
@@ -36,4 +41,4 @@ const ChannelsWindow = () => {
   );
 };
 
-export default ChannelsWindow;
+export default connect(mapStateToProps)(ChannelsWindow);

@@ -48,7 +48,7 @@ const NewMessageForm = (props) => {
         <Form>
           <div className="input-group mw-100">
             <Field type="text" name="text" autoComplete="off" className="form-control" />
-            <Button type="submit" disabled={isSubmitting || !dirty || !isValid} variant="primary" className="ml-1 btn-send">
+            <Button type="submit" disabled={isSubmitting || !dirty || !isValid} variant="primary" className="ml-1 d-none d-md-block">
               {t('chatWindow.submit')}
             </Button>
             <div>{errors.submit}</div>
