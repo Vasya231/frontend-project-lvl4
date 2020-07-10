@@ -1,25 +1,26 @@
 import { useState, useEffect } from 'react';
-import _ from 'lodash';
+import { normalize, schema } from 'normalizr';
 
-const buildInitialState = (gon) => {
+const itemSchema = new schema.Entity('items');
+const itemListSchema = new schema.Array(itemSchema);
+
+export const normalizeItems = (itemList) => {
+  const normalizedList = normalize(itemList, itemListSchema);
+  return {
+    byId: normalizedList.entities.items,
+    ids: normalizedList.result,
+  };
+};
+
+export const buildInitialState = (gon) => {
   const { channels, messages, currentChannelId } = gon;
-  const channelsById = _.keyBy(channels, 'id');
-  const messagesById = _.keyBy(messages, 'id');
-  const channelIds = channels.map((c) => c.id);
-  const messageIds = messages.map((m) => m.id);
   return {
     activeChannel: {
       id: currentChannelId,
     },
     entities: {
-      channels: {
-        byId: channelsById,
-        ids: channelIds,
-      },
-      messages: {
-        byId: messagesById,
-        ids: messageIds,
-      },
+      channels: normalizeItems(channels),
+      messages: normalizeItems(messages),
     },
   };
 };
@@ -29,7 +30,7 @@ const getWindowDimensions = () => {
   return { height, width };
 };
 
-const useWindowDimensions = () => {
+export const useWindowDimensions = () => {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
   useEffect(() => {
@@ -54,5 +55,3 @@ export const validateMessageText = ({ text }) => {
   }
   return {};
 };
-
-export { buildInitialState, useWindowDimensions };
