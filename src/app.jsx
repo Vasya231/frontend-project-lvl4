@@ -3,8 +3,6 @@ import React from 'react';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import openSocket from 'socket.io-client';
-import faker from 'faker';
-import Cookies from 'js-cookie';
 import i18next from 'i18next';
 
 import ChannelsWindow from 'features/channels/ChannelsWindow';
@@ -20,6 +18,7 @@ import texts from './locales';
 const startApp = async ({
   rootElement,
   initialState,
+  username,
 }) => {
   const store = configureStore({
     reducer: rootReducer,
@@ -27,11 +26,6 @@ const startApp = async ({
   });
 
   const io = openSocket();
-
-  if (!Cookies.get('chatUsername')) {
-    Cookies.set('chatUsername', faker.name.findName());
-  }
-  const username = Cookies.get('chatUsername');
 
   io.on('newMessage', (data) => {
     const { data: { attributes: newMessage } } = data;
