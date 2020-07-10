@@ -3,8 +3,8 @@ import _ from 'lodash';
 
 import { getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
 
-const selectChannelIds = (state) => (state.channels.ids);
-const selectChannelStorage = (state) => (state.channels.byId);
+const selectChannelIds = (state) => (state.entities.channels.ids);
+const selectChannelStorage = (state) => (state.entities.channels.byId);
 
 export const selectChannels = createSelector(
   [selectChannelIds, selectChannelStorage],

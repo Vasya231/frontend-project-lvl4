@@ -11,13 +11,15 @@ const buildInitialState = (gon) => {
     activeChannel: {
       id: currentChannelId,
     },
-    channels: {
-      byId: channelsById,
-      ids: channelIds,
-    },
-    messages: {
-      byId: messagesById,
-      ids: messageIds,
+    entities: {
+      channels: {
+        byId: channelsById,
+        ids: channelIds,
+      },
+      messages: {
+        byId: messagesById,
+        ids: messageIds,
+      },
     },
   };
 };

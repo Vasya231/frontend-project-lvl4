@@ -3,8 +3,8 @@ import _ from 'lodash';
 
 import { getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
 
-export const selectMessageStorage = (state) => state.messages.byId;
-export const selectMessageIds = (state) => state.messages.ids;
+export const selectMessageStorage = (state) => state.entities.messages.byId;
+export const selectMessageIds = (state) => state.entities.messages.ids;
 
 export const selectOrderedMessages = createSelector(
   [selectMessageIds, selectMessageStorage],
