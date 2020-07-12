@@ -7,7 +7,7 @@ const itemListSchema = new schema.Array(itemSchema);
 export const normalizeItems = (itemList) => {
   const normalizedList = normalize(itemList, itemListSchema);
   return {
-    byId: normalizedList.entities.items,
+    byId: normalizedList.entities.items || {},
     ids: normalizedList.result,
   };
 };
