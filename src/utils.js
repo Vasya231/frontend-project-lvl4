@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { normalize, schema } from 'normalizr';
 
+import { channelNameMaxLength } from 'constants';
+
 const itemSchema = new schema.Entity('items');
 const itemListSchema = new schema.Array(itemSchema);
 
@@ -43,14 +45,18 @@ export const useWindowDimensions = () => {
 };
 
 export const validateChannelName = ({ channelName }) => {
-  if (!String(channelName).trim()) {
+  const normalizedChannelName = channelName.trim();
+  if (!normalizedChannelName) {
     return { channelName: 'Required' };
+  }
+  if (normalizedChannelName.length > channelNameMaxLength) {
+    return { channelName: 'Too long' };
   }
   return {};
 };
 
 export const validateMessageText = ({ text }) => {
-  if (!String(text).trim()) {
+  if (!text.trim()) {
     return { text: 'Required' };
   }
   return {};
