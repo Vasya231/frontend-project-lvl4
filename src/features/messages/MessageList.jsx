@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { animateScroll as scroll } from 'react-scroll';
+
 import { selectVisibleMessages } from 'features/messages/messagesSlice';
 
 const mapStateToProps = (state) => ({
@@ -18,11 +20,6 @@ const generateMessageElement = (message) => {
 };
 
 class MessageList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.chatWindow = React.createRef();
-  }
-
   componentDidMount() {
     this.scrollToBottom();
   }
@@ -32,14 +29,13 @@ class MessageList extends React.Component {
   }
 
   scrollToBottom = () => {
-    const { scrollHeight } = this.chatWindow.current;
-    this.chatWindow.current.scrollTop = scrollHeight;
+    scroll.scrollToBottom({ containerId: 'message-window', duration: 0 });
   };
 
   render() {
     const { messages } = this.props;
     return (
-      <ul ref={this.chatWindow} className="list-group overflow-auto">{messages.map(generateMessageElement)}</ul>
+      <ul id="message-window" className="list-group overflow-auto">{messages.map(generateMessageElement)}</ul>
     );
   }
 }
