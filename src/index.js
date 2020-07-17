@@ -16,7 +16,6 @@ if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
-const chatRoot = document.getElementById('chat');
 const initialState = buildInitialState(gon);
 
 if (!Cookies.get('chatUsername')) {
@@ -25,7 +24,7 @@ if (!Cookies.get('chatUsername')) {
 const username = Cookies.get('chatUsername');
 
 startApp({
-  rootElement: chatRoot,
+  rootElementId: 'chat',
   initialState,
   username,
 });

@@ -15,10 +15,12 @@ import rootReducer from './reducers';
 import texts from './locales';
 
 const startApp = ({
-  rootElement,
+  rootElementId,
   initialState,
   username,
 }) => {
+  const rootElement = document.getElementById(rootElementId);
+
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: initialState,
