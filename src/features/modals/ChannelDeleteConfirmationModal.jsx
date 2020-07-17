@@ -18,10 +18,8 @@ const ChannelDeleteConfirmationModal = (props) => {
     setSubmitting(true);
     try {
       await serverAPI.deleteChannel(id);
-      setSubmitting(false);
       closeModal();
     } catch (e) {
-      setSubmitting(false);
       openAnotherModal({
         type: 'errorMessage',
         modalProps: {

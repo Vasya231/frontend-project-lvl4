@@ -28,11 +28,10 @@ const ChannelRenameModal = (props) => {
         <Formik
           initialValues={{ channelName: '' }}
           validate={validateChannelName}
-          onSubmit={async ({ channelName }, { setSubmitting }) => {
+          onSubmit={async ({ channelName }) => {
             const normalizedChannelName = channelName.trim();
             try {
               await serverAPI.renameChannel(channelId, normalizedChannelName);
-              setSubmitting(false);
               handleClose();
             } catch (e) {
               openAnotherModal({
