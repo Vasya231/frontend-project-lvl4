@@ -10,8 +10,7 @@ const modalsSlice = createSlice({
     showModal(state, action) {
       return action.payload;
     },
-    hideModal(state, action) {
-      console.log(action.payload);
+    hideModal() {
       return {
         type: null,
         modalProps: {},
