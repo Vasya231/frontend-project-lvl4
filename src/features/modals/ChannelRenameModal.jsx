@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import {
-  Formik, Form, Field,
-} from 'formik';
+import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 
 import serverAPI from 'serverAPI';
@@ -18,6 +16,27 @@ const ChannelRenameModal = (props) => {
   const { channelId, closeModal, openAnotherModal } = props;
   const handleClose = () => closeModal();
   const { t } = useTranslation();
+  const formik = useFormik({
+    initialValues: { channelName: '' },
+    validate: validateChannelName,
+    onSubmit: async ({ channelName }) => {
+      const normalizedChannelName = channelName.trim();
+      try {
+        await serverAPI.renameChannel(channelId, normalizedChannelName);
+        handleClose();
+      } catch (e) {
+        openAnotherModal({
+          type: 'errorMessage',
+          modalProps: {
+            errorMessage: t('errors.network'),
+          },
+        });
+      }
+    },
+  });
+  const {
+    handleSubmit, handleChange, isSubmitting, isValid, dirty, values,
+  } = formik;
 
   return (
     <Modal show onHide={handleClose}>
@@ -25,33 +44,19 @@ const ChannelRenameModal = (props) => {
         <Modal.Title>{t('renameChannelModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Formik
-          initialValues={{ channelName: '' }}
-          validate={validateChannelName}
-          onSubmit={async ({ channelName }) => {
-            const normalizedChannelName = channelName.trim();
-            try {
-              await serverAPI.renameChannel(channelId, normalizedChannelName);
-              handleClose();
-            } catch (e) {
-              openAnotherModal({
-                type: 'errorMessage',
-                modalProps: {
-                  errorMessage: t('errors.network'),
-                },
-              });
-            }
-          }}
-        >
-          {({ isSubmitting, isValid, dirty }) => (
-            <Form>
-              <Field name="channelName" maxLength={channelNameMaxLength} type="text" className="mr-2" />
-              <Button type="submit" variant="primary" disabled={isSubmitting || !isValid || !dirty}>
-                {t('renameChannelModal.submitButton')}
-              </Button>
-            </Form>
-          )}
-        </Formik>
+        <form onSubmit={handleSubmit}>
+          <input
+            name="channelName"
+            maxLength={channelNameMaxLength}
+            type="text"
+            className="mr-2"
+            onChange={handleChange}
+            value={values.channelName}
+          />
+          <Button type="submit" variant="primary" disabled={isSubmitting || !isValid || !dirty}>
+            {t('renameChannelModal.submitButton')}
+          </Button>
+        </form>
       </Modal.Body>
     </Modal>
   );
