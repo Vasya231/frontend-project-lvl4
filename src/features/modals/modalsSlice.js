@@ -19,6 +19,10 @@ const modalsSlice = createSlice({
   },
 });
 
+export const getModalProps = (state) => state.modals.modalProps;
+
+export const getModalType = (state) => state.modals.type;
+
 export const { showModal, hideModal } = modalsSlice.actions;
 
 export default modalsSlice.reducer;

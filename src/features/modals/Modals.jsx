@@ -1,16 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
-import { showModal, hideModal } from 'features/modals/modalsSlice';
+import {
+  showModal, hideModal, getModalType, getModalProps,
+} from 'features/modals/modalsSlice';
 import ChannelDeleteConfirmationModal from 'features/modals/ChannelDeleteConfirmationModal';
 import NewChannelModal from 'features/modals/NewChannelModal';
 import ChannelRenameModal from 'features/modals/ChannelRenameModal';
 import ErrorMessageModal from 'features/modals/ErrorMessageModal';
-
-const mapStateToProps = (state) => ({
-  type: state.modals.type,
-  modalProps: state.modals.modalProps,
-});
 
 const actions = {
   showModal, hideModal,
@@ -32,7 +29,9 @@ const getModalComponent = {
 };
 
 const Modals = (props) => {
-  const { type, modalProps, hideModal: hideModalHandler } = props;
+  const { hideModal: hideModalHandler } = props;
+  const type = useSelector(getModalType);
+  const modalProps = useSelector(getModalProps);
   const modalComponent = getModalComponent[type];
 
   return (
@@ -42,4 +41,4 @@ const Modals = (props) => {
   );
 };
 
-export default connect(mapStateToProps, actions)(Modals);
+export default connect(null, actions)(Modals);

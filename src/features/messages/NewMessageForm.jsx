@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
@@ -8,23 +8,19 @@ import serverAPI from 'serverAPI';
 import { showModal } from 'features/modals/modalsSlice';
 import AppContext from 'AppContext';
 import { validateMessageText } from 'utils';
-
-
-const mapStateToProps = (state) => ({
-  activeChannelId: state.activeChannel.id,
-});
+import { getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
 
 const actions = { openModal: showModal };
 
 const NewMessageForm = (props) => {
   const { username } = useContext(AppContext);
   const { t } = useTranslation();
-  const { activeChannelId, openModal } = props;
+  const { openModal } = props;
+  const activeChannelId = useSelector(getActiveChannelId);
   const formik = useFormik({
     initialValues: { text: '' },
     validate: validateMessageText,
     onSubmit: async (values, formikActions) => {
-      console.log(values);
       const { setSubmitting, resetForm } = formikActions;
       try {
         await serverAPI.addNewMessage(values.text, username, activeChannelId);
@@ -61,4 +57,4 @@ const NewMessageForm = (props) => {
   );
 };
 
-export default connect(mapStateToProps, actions)(NewMessageForm);
+export default connect(null, actions)(NewMessageForm);

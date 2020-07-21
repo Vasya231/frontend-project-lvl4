@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import { useWindowDimensions } from 'utils';
@@ -9,13 +9,9 @@ import NewChannelButton from 'features/channels/NewChannelButton';
 import { getActiveChannelName } from 'features/channels/channelsSlice';
 import { mobileWidthBreakpoint } from 'constants';
 
-const mapStateToProps = (state) => ({
-  activeChannelName: getActiveChannelName(state),
-});
-
-const ChannelsWindow = (props) => {
+const ChannelsWindow = () => {
   const { width } = useWindowDimensions();
-  const { activeChannelName } = props;
+  const activeChannelName = useSelector(getActiveChannelName);
   const content = (
     <>
       <ChannelList />
@@ -45,4 +41,4 @@ const ChannelsWindow = (props) => {
   );
 };
 
-export default connect(mapStateToProps)(ChannelsWindow);
+export default ChannelsWindow;

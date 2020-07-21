@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -10,11 +10,6 @@ import { setActiveChannel, getActiveChannelId } from 'features/activeChannel/act
 import { showModal } from 'features/modals/modalsSlice';
 import { selectChannels } from 'features/channels/channelsSlice';
 
-const mapStateToProps = (state) => ({
-  channels: selectChannels(state),
-  activeChannelId: getActiveChannelId(state),
-});
-
 const actions = {
   switchChannel: setActiveChannel,
   openModal: showModal,
@@ -22,10 +17,12 @@ const actions = {
 
 const ChannelList = (props) => {
   const {
-    activeChannelId, channels, switchChannel, openModal,
+    switchChannel, openModal,
   } = props;
 
   const { t } = useTranslation();
+  const channels = useSelector(selectChannels);
+  const activeChannelId = useSelector(getActiveChannelId);
 
   const handleDeleteChannel = (id) => () => {
     openModal({
@@ -78,4 +75,4 @@ const ChannelList = (props) => {
   );
 };
 
-export default connect(mapStateToProps, actions)(ChannelList);
+export default connect(null, actions)(ChannelList);

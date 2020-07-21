@@ -1,12 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
 
 import { selectVisibleMessages } from 'features/messages/messagesSlice';
-
-const mapStateToProps = (state) => ({
-  messages: selectVisibleMessages(state),
-});
 
 const generateMessageElement = (message) => {
   const { id, text, author } = message;
@@ -19,25 +15,15 @@ const generateMessageElement = (message) => {
   );
 };
 
-class MessageList extends React.Component {
-  componentDidMount() {
-    this.scrollToBottom();
-  }
+const MessageList = () => {
+  useEffect(
+    () => scroll.scrollToBottom({ containerId: 'message-window', duration: 0 }),
+  );
+  const messages = useSelector(selectVisibleMessages);
+  return (
+    <ul id="message-window" className="list-group overflow-auto">{messages.map(generateMessageElement)}</ul>
+  );
+};
 
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
 
-  scrollToBottom = () => {
-    scroll.scrollToBottom({ containerId: 'message-window', duration: 0 });
-  };
-
-  render() {
-    const { messages } = this.props;
-    return (
-      <ul id="message-window" className="list-group overflow-auto">{messages.map(generateMessageElement)}</ul>
-    );
-  }
-}
-
-export default connect(mapStateToProps)(MessageList);
+export default MessageList;
