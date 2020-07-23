@@ -13,7 +13,7 @@ const actions = {
   showModal, hideModal,
 };
 
-const getModalComponent = {
+const modalComponents = {
   deleteChannelConfirmation: ({ channelId }, hideModalHandler) => (
     <ChannelDeleteConfirmationModal channelId={channelId} closeModal={hideModalHandler} />
   ),
@@ -32,7 +32,7 @@ const Modals = (props) => {
   const { hideModal: hideModalHandler } = props;
   const type = useSelector(getModalType);
   const modalProps = useSelector(getModalProps);
-  const modalComponent = getModalComponent[type];
+  const modalComponent = modalComponents[type];
 
   return (
     <>
