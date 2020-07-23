@@ -34,11 +34,7 @@ const Modals = (props) => {
   const modalProps = useSelector(getModalProps);
   const modalComponent = modalComponents[type];
 
-  return (
-    <>
-      {modalComponent && modalComponent(modalProps, hideModalHandler)}
-    </>
-  );
+  return (modalComponent && modalComponent(modalProps, hideModalHandler));
 };
 
 export default connect(null, actions)(Modals);
