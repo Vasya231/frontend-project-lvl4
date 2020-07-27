@@ -1,31 +1,6 @@
 import { useState, useEffect } from 'react';
-import { normalize, schema } from 'normalizr';
 
 import { channelNameMaxLength } from 'constants';
-
-const itemSchema = new schema.Entity('items');
-const itemListSchema = new schema.Array(itemSchema);
-
-export const normalizeItems = (itemList) => {
-  const normalizedList = normalize(itemList, itemListSchema);
-  return {
-    byId: normalizedList.entities.items || {},
-    ids: normalizedList.result,
-  };
-};
-
-export const buildInitialState = (gon) => {
-  const { channels, messages, currentChannelId } = gon;
-  return {
-    activeChannel: {
-      id: currentChannelId,
-    },
-    entities: {
-      channels: normalizeItems(channels),
-      messages: normalizeItems(messages),
-    },
-  };
-};
 
 const getWindowDimensions = () => {
   const { innerHeight: height, innerWidth: width } = window;

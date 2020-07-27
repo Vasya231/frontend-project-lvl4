@@ -1,42 +1,32 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
-import _ from 'lodash';
 
 import { getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
 
-const selectChannelIds = (state) => (state.entities.channels.ids);
-const selectChannelStorage = (state) => (state.entities.channels.byId);
-
-export const selectChannels = createSelector(
-  [selectChannelIds, selectChannelStorage],
-  (ids, byId) => ids.map((id) => byId[id]),
-);
+export const getChannels = (state) => state.channels;
 
 export const getActiveChannelName = createSelector(
-  [getActiveChannelId, selectChannelStorage],
-  (id, byId) => byId[id].name,
+  [getActiveChannelId, getChannels],
+  (activeChannelId, channels) => channels.find(({ id }) => (id === activeChannelId)).name,
 );
 
 const channelsSlice = createSlice({
   name: 'channels',
-  initialState: {
-    byId: {},
-    ids: [],
-  },
+  initialState: [],
   reducers: {
     addChannel(state, action) {
-      const { channel, channel: { id } } = action.payload;
-      _.set(state.byId, id, channel);
-      state.ids.push(id);
+      const { channel } = action.payload;
+      state.push(channel);
     },
     deleteChannel(state, action) {
-      const { id } = action.payload;
-      _.unset(state.byId, id);
-      _.pull(state.ids, id);
+      const { id: deletedChannelId } = action.payload;
+      return state.filter(({ id }) => (id !== deletedChannelId));
     },
     renameChannel(state, action) {
       const { channel } = action.payload;
-      const { id } = channel;
-      _.set(state.byId, id, channel);
+      const { id: renamedChannelId } = channel;
+      const renamedChannelIndex = state.findIndex(({ id }) => (id === renamedChannelId));
+      // eslint-disable-next-line no-param-reassign
+      state[renamedChannelIndex] = channel;
     },
   },
 });

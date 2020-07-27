@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 import { setActiveChannel, getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
 import { showModal } from 'features/modals/modalsSlice';
-import { selectChannels } from 'features/channels/channelsSlice';
+import { getChannels } from 'features/channels/channelsSlice';
 
 const actions = {
   switchChannel: setActiveChannel,
@@ -21,7 +21,7 @@ const ChannelList = (props) => {
   } = props;
 
   const { t } = useTranslation();
-  const channels = useSelector(selectChannels);
+  const channels = useSelector(getChannels);
   const activeChannelId = useSelector(getActiveChannelId);
 
   const handleDeleteChannel = (id) => () => {

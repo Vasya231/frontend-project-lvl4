@@ -1,46 +1,28 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
-import _ from 'lodash';
 
 import { getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
 
-export const selectMessageStorage = (state) => state.entities.messages.byId;
-export const selectMessageIds = (state) => state.entities.messages.ids;
-
-export const selectOrderedMessages = createSelector(
-  [selectMessageIds, selectMessageStorage],
-  (ids, byId) => ids.map((id) => byId[id]),
-);
+export const getMessages = (state) => state.messages;
 
 export const selectVisibleMessages = createSelector(
-  [selectOrderedMessages, getActiveChannelId],
-  (orderedMessages, activeChannelId) => orderedMessages
+  [getMessages, getActiveChannelId],
+  (messages, activeChannelId) => messages
     .filter(({ channelId }) => channelId === activeChannelId),
 );
 
 const messagesSlice = createSlice({
   name: 'messages',
-  initialState: {
-    byId: {},
-    ids: [],
-  },
+  initialState: [],
   reducers: {
     addMessage(state, action) {
       const { message } = action.payload;
-      const { id } = message;
-      _.set(state.byId, id, message);
-      state.ids.push(id);
+      state.push(message);
     },
   },
   extraReducers: {
     'channels/deleteChannel': (state, action) => {
       const { id: deletedChannelId } = action.payload;
-      const messagesToDelete = _.pickBy(
-        state.byId,
-        ({ channelId }) => (channelId === deletedChannelId),
-      );
-      const deletedMessagesIds = _.keys(messagesToDelete).map(Number);
-      _.pullAll(state.ids, deletedMessagesIds);
-      deletedMessagesIds.forEach((id) => _.unset(state.byId, id));
+      return state.filter(({ channelId }) => (channelId !== deletedChannelId));
     },
   },
 });

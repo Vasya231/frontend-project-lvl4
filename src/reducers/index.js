@@ -4,13 +4,9 @@ import channelsReducer from 'features/channels/channelsSlice';
 import activeChannelReducer from 'features/activeChannel/activeChannelSlice';
 import modalsReducer from 'features/modals/modalsSlice';
 
-const entitiesReducer = combineReducers({
+export default combineReducers({
   messages: messagesReducer,
   channels: channelsReducer,
-});
-
-export default combineReducers({
-  entities: entitiesReducer,
-  activeChannel: activeChannelReducer,
+  currentChannelId: activeChannelReducer,
   modals: modalsReducer,
 });

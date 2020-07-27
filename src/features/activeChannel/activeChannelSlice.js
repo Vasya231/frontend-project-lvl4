@@ -1,31 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
-import _ from 'lodash';
 
 import { generalChannelId } from 'constants';
 
 const activeChannelSlice = createSlice({
   name: 'activeChannel',
-  initialState: {
-    id: null,
-  },
+  initialState: null,
   reducers: {
     setActiveChannel(state, action) {
       const { id } = action.payload;
-      _.set(state, 'id', id);
+      return id;
     },
   },
   extraReducers: {
     'channels/deleteChannel': (state, action) => {
       const { id } = action.payload;
-      const { id: currentChannelId } = state;
-      if (id === currentChannelId) {
-        _.set(state, 'id', generalChannelId);
+      if (id === state) {
+        return generalChannelId;
       }
+      return state;
     },
   },
 });
 
-export const getActiveChannelId = (state) => state.activeChannel.id;
+export const getActiveChannelId = (state) => state.currentChannelId;
 
 export const { setActiveChannel } = activeChannelSlice.actions;
 
