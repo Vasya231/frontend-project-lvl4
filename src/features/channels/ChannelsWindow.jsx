@@ -6,12 +6,12 @@ import { useWindowDimensions } from 'utils';
 
 import ChannelList from 'features/channels/ChannelList';
 import NewChannelButton from 'features/channels/NewChannelButton';
-import { getActiveChannelName } from 'features/channels/channelsSlice';
+import { getCurrentChannelName } from 'features/channels/channelsSlice';
 import { mobileWidthBreakpoint } from 'constants';
 
 const ChannelsWindow = () => {
   const { width } = useWindowDimensions();
-  const activeChannelName = useSelector(getActiveChannelName);
+  const currentChannelName = useSelector(getCurrentChannelName);
   const content = (
     <>
       <ChannelList />
@@ -24,7 +24,7 @@ const ChannelsWindow = () => {
   if (width < mobileWidthBreakpoint) {
     return (
       <Dropdown className="w-100 d-flex mb-1">
-        <Dropdown.Toggle className="w-100" variant="success">{activeChannelName}</Dropdown.Toggle>
+        <Dropdown.Toggle className="w-100" variant="success">{currentChannelName}</Dropdown.Toggle>
         <Dropdown.Menu className="w-100 d-flex flex-column vh-100">
           <div className="d-flex flex-column h-75">
             {content}

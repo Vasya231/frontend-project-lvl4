@@ -10,12 +10,13 @@ import '../assets/application.scss';
 // @ts-ignore
 import gon from 'gon';
 import startApp from './app.jsx';
+import { buildInitialState } from './utils';
 
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
-console.log(gon);
+const initialState = buildInitialState(gon);
 
 if (!Cookies.get('chatUsername')) {
   Cookies.set('chatUsername', faker.name.findName());
@@ -24,6 +25,6 @@ const username = Cookies.get('chatUsername');
 
 startApp({
   rootElementId: 'chat',
-  initialState: gon,
+  initialState,
   username,
 });

@@ -2,6 +2,14 @@ import { useState, useEffect } from 'react';
 
 import { channelNameMaxLength } from 'constants';
 
+export const buildInitialState = ({ messages, channels: channelList, currentChannelId }) => ({
+  messages,
+  channels: {
+    currentChannelId,
+    channelList,
+  },
+});
+
 const getWindowDimensions = () => {
   const { innerHeight: height, innerWidth: width } = window;
   return { height, width };

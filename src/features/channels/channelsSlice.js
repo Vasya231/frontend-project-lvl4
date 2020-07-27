@@ -1,36 +1,54 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
 
-import { getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
+import { generalChannelId } from 'constants';
 
-export const getChannels = (state) => state.channels;
+export const getChannelList = (state) => state.channels.channelList;
 
-export const getActiveChannelName = createSelector(
-  [getActiveChannelId, getChannels],
-  (activeChannelId, channels) => channels.find(({ id }) => (id === activeChannelId)).name,
+export const getCurrentChannelId = (state) => state.channels.currentChannelId;
+
+export const getCurrentChannelName = createSelector(
+  [getCurrentChannelId, getChannelList],
+  (currentChannelId, channelList) => channelList.find(({ id }) => (id === currentChannelId)).name,
 );
 
 const channelsSlice = createSlice({
   name: 'channels',
-  initialState: [],
+  initialState: {
+    channelList: [],
+    currentChannelId: null,
+  },
   reducers: {
     addChannel(state, action) {
       const { channel } = action.payload;
-      state.push(channel);
+      state.channelList.push(channel);
     },
     deleteChannel(state, action) {
       const { id: deletedChannelId } = action.payload;
-      return state.filter(({ id }) => (id !== deletedChannelId));
+      // eslint-disable-next-line no-param-reassign
+      state.channelList = state.channelList.filter(({ id }) => (id !== deletedChannelId));
+      if (state.currentChannelId === deletedChannelId) {
+        // eslint-disable-next-line no-param-reassign
+        state.currentChannelId = generalChannelId;
+      }
     },
     renameChannel(state, action) {
       const { channel } = action.payload;
       const { id: renamedChannelId } = channel;
-      const renamedChannelIndex = state.findIndex(({ id }) => (id === renamedChannelId));
+      const renamedChannelIndex = state.channelList
+        .findIndex(({ id }) => (id === renamedChannelId));
       // eslint-disable-next-line no-param-reassign
-      state[renamedChannelIndex] = channel;
+      state.channelList[renamedChannelIndex] = channel;
+    },
+    setCurrentChannel(state, action) {
+      const { id } = action.payload;
+      // eslint-disable-next-line no-param-reassign
+      state.currentChannelId = id;
     },
   },
 });
 
-export const { addChannel, deleteChannel, renameChannel } = channelsSlice.actions;
+export const {
+  addChannel, deleteChannel, renameChannel, setCurrentChannel,
+} = channelsSlice.actions;
 
 export default channelsSlice.reducer;

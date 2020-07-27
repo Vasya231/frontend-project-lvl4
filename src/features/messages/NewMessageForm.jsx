@@ -8,7 +8,7 @@ import serverAPI from 'serverAPI';
 import { showModal } from 'features/modals/modalsSlice';
 import AppContext from 'AppContext';
 import { validateMessageText } from 'utils';
-import { getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
+import { getCurrentChannelId } from 'features/channels/channelsSlice';
 
 const actions = { openModal: showModal };
 
@@ -16,14 +16,14 @@ const NewMessageForm = (props) => {
   const { username } = useContext(AppContext);
   const { t } = useTranslation();
   const { openModal } = props;
-  const activeChannelId = useSelector(getActiveChannelId);
+  const currentChannelId = useSelector(getCurrentChannelId);
   const formik = useFormik({
     initialValues: { text: '' },
     validate: validateMessageText,
     onSubmit: async (values, formikActions) => {
       const { setSubmitting, resetForm } = formikActions;
       try {
-        await serverAPI.addNewMessage(values.text, username, activeChannelId);
+        await serverAPI.addNewMessage(values.text, username, currentChannelId);
         resetForm();
         setSubmitting(false);
       } catch (error) {

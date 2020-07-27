@@ -1,13 +1,13 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
 
-import { getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
+import { getCurrentChannelId } from 'features/channels/channelsSlice';
 
 export const getMessages = (state) => state.messages;
 
 export const selectVisibleMessages = createSelector(
-  [getMessages, getActiveChannelId],
-  (messages, activeChannelId) => messages
-    .filter(({ channelId }) => channelId === activeChannelId),
+  [getMessages, getCurrentChannelId],
+  (messages, currentChannelId) => messages
+    .filter(({ channelId }) => channelId === currentChannelId),
 );
 
 const messagesSlice = createSlice({

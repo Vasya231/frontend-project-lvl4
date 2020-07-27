@@ -6,12 +6,11 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { useTranslation } from 'react-i18next';
 
-import { setActiveChannel, getActiveChannelId } from 'features/activeChannel/activeChannelSlice';
 import { showModal } from 'features/modals/modalsSlice';
-import { getChannels } from 'features/channels/channelsSlice';
+import { getChannelList, setCurrentChannel, getCurrentChannelId } from 'features/channels/channelsSlice';
 
 const actions = {
-  switchChannel: setActiveChannel,
+  switchChannel: setCurrentChannel,
   openModal: showModal,
 };
 
@@ -21,8 +20,8 @@ const ChannelList = (props) => {
   } = props;
 
   const { t } = useTranslation();
-  const channels = useSelector(getChannels);
-  const activeChannelId = useSelector(getActiveChannelId);
+  const channels = useSelector(getChannelList);
+  const activeChannelId = useSelector(getCurrentChannelId);
 
   const handleDeleteChannel = (id) => () => {
     openModal({
