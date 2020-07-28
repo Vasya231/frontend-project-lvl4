@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import serverAPI from 'serverAPI';
 import connect from 'connect';
 import { channelNameMaxLength } from 'constants';
-import { validateChannelName } from 'utils';
+import { channelNameSchema } from 'utils';
 
 const ChannelRenameModal = (props) => {
   const { channelId, closeModal, showModal } = props;
@@ -15,7 +15,7 @@ const ChannelRenameModal = (props) => {
   const { t } = useTranslation();
   const formik = useFormik({
     initialValues: { channelName: '' },
-    validate: validateChannelName,
+    validationSchema: channelNameSchema,
     onSubmit: async ({ channelName }) => {
       const normalizedChannelName = channelName.trim();
       try {

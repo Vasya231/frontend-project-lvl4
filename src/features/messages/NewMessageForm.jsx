@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import serverAPI from 'serverAPI';
 import AppContext from 'AppContext';
 import connect from 'connect';
-import { validateMessageText } from 'utils';
+import { messageTextSchema } from 'utils';
 import { getCurrentChannelId } from 'features/channels/channelsSlice';
 
 
@@ -18,7 +18,7 @@ const NewMessageForm = (props) => {
   const currentChannelId = useSelector(getCurrentChannelId);
   const formik = useFormik({
     initialValues: { text: '' },
-    validate: validateMessageText,
+    validationSchema: messageTextSchema,
     onSubmit: async (values, formikActions) => {
       const { setSubmitting, resetForm } = formikActions;
       try {

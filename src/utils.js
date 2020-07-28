@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 
 import { channelNameMaxLength } from 'constants';
 
+import { object, string } from 'yup';
+
 export const buildInitialState = ({ messages, channels: channelList, currentChannelId }) => ({
   messages,
   channels: {
@@ -27,20 +29,10 @@ export const useWindowDimensions = () => {
   return windowDimensions;
 };
 
-export const validateChannelName = ({ channelName }) => {
-  const normalizedChannelName = channelName.trim();
-  if (!normalizedChannelName) {
-    return { channelName: 'Required' };
-  }
-  if (normalizedChannelName.length > channelNameMaxLength) {
-    return { channelName: 'Too long' };
-  }
-  return {};
-};
+export const channelNameSchema = object().shape({
+  channelName: string().transform((value) => value.trim()).max(channelNameMaxLength).required(),
+});
 
-export const validateMessageText = ({ text }) => {
-  if (!text.trim()) {
-    return { text: 'Required' };
-  }
-  return {};
-};
+export const messageTextSchema = object().shape({
+  text: string().transform((value) => value.trim()).required(),
+});
