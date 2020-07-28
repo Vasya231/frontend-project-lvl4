@@ -1,13 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
 
-import { showModal } from 'features/modals/modalsSlice';
-
-const actions = {
-  showModal,
-};
+import connect from 'connect';
 
 const NewChannelModal = (props) => {
   const handleOpenModal = () => props.showModal({
@@ -24,4 +19,4 @@ const NewChannelModal = (props) => {
   );
 };
 
-export default connect(null, actions)(NewChannelModal);
+export default connect(NewChannelModal);

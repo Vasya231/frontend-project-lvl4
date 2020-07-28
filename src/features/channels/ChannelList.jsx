@@ -1,22 +1,17 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { useTranslation } from 'react-i18next';
 
-import { showModal } from 'features/modals/modalsSlice';
-import { getChannelList, setCurrentChannel, getCurrentChannelId } from 'features/channels/channelsSlice';
-
-const actions = {
-  switchChannel: setCurrentChannel,
-  openModal: showModal,
-};
+import connect from 'connect';
+import { getChannelList, getCurrentChannelId } from 'features/channels/channelsSlice';
 
 const ChannelList = (props) => {
   const {
-    switchChannel, openModal,
+    setCurrentChannel, showModal,
   } = props;
 
   const { t } = useTranslation();
@@ -24,7 +19,7 @@ const ChannelList = (props) => {
   const activeChannelId = useSelector(getCurrentChannelId);
 
   const handleDeleteChannel = (id) => () => {
-    openModal({
+    showModal({
       type: 'deleteChannelConfirmation',
       modalProps: {
         channelId: id,
@@ -33,14 +28,14 @@ const ChannelList = (props) => {
     return false;
   };
 
-  const handleRenameChannel = (id) => () => openModal({
+  const handleRenameChannel = (id) => () => showModal({
     type: 'renameChannel',
     modalProps: {
       channelId: id,
     },
   });
 
-  const handleSwitchChannel = (id) => () => switchChannel({ id });
+  const handleSwitchChannel = (id) => () => setCurrentChannel({ id });
 
   const generateChannelElement = (channel) => {
     const { id, name, removable } = channel;
@@ -74,4 +69,4 @@ const ChannelList = (props) => {
   );
 };
 
-export default connect(null, actions)(ChannelList);
+export default connect(ChannelList);

@@ -1,20 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 
+import connect from 'connect';
 import serverAPI from 'serverAPI';
-import { showModal } from 'features/modals/modalsSlice';
 import { channelNameMaxLength } from 'constants';
 import { validateChannelName } from 'utils';
 
-
-const actions = { openAnotherModal: showModal };
-
 const NewChannelModal = (props) => {
-  const { closeModal, openAnotherModal } = props;
+  const { closeModal, showModal } = props;
   const handleClose = () => closeModal();
   const { t } = useTranslation();
   const formik = useFormik({
@@ -27,7 +23,7 @@ const NewChannelModal = (props) => {
         setSubmitting(false);
         handleClose();
       } catch (e) {
-        openAnotherModal({
+        showModal({
           type: 'errorMessage',
           modalProps: {
             errorMessage: t('errors.network'),
@@ -64,4 +60,4 @@ const NewChannelModal = (props) => {
   );
 };
 
-export default connect(null, actions)(NewChannelModal);
+export default connect(NewChannelModal);

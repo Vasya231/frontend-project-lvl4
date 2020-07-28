@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
 
 import serverAPI from 'serverAPI';
-import { showModal } from 'features/modals/modalsSlice';
+import connect from 'connect';
 
-const actions = { openAnotherModal: showModal };
 
 const ChannelDeleteConfirmationModal = (props) => {
   const { t } = useTranslation();
 
-  const { closeModal, channelId, openAnotherModal } = props;
+  const { closeModal, channelId, showModal } = props;
   const [isSubmitting, setSubmitting] = useState(false);
   const handleDelete = (id) => async () => {
     setSubmitting(true);
@@ -20,7 +18,7 @@ const ChannelDeleteConfirmationModal = (props) => {
       await serverAPI.deleteChannel(id);
       closeModal();
     } catch (e) {
-      openAnotherModal({
+      showModal({
         type: 'errorMessage',
         modalProps: {
           errorMessage: t('errors.network'),
@@ -46,4 +44,4 @@ const ChannelDeleteConfirmationModal = (props) => {
   );
 };
 
-export default connect(null, actions)(ChannelDeleteConfirmationModal);
+export default connect(ChannelDeleteConfirmationModal);

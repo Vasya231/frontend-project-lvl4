@@ -1,17 +1,12 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import {
-  showModal, hideModal, getModalType, getModalProps,
-} from 'features/modals/modalsSlice';
+import connect from 'connect';
+import { getModalType, getModalProps } from 'features/modals/modalsSlice';
 import ChannelDeleteConfirmationModal from 'features/modals/ChannelDeleteConfirmationModal';
 import NewChannelModal from 'features/modals/NewChannelModal';
 import ChannelRenameModal from 'features/modals/ChannelRenameModal';
 import ErrorMessageModal from 'features/modals/ErrorMessageModal';
-
-const actions = {
-  showModal, hideModal,
-};
 
 const modalComponents = {
   deleteChannelConfirmation: ({ channelId }, hideModalHandler) => (
@@ -41,4 +36,4 @@ const Modals = (props) => {
   );
 };
 
-export default connect(null, actions)(Modals);
+export default connect(Modals);

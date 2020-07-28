@@ -20,6 +20,7 @@ module.exports = {
       serverAPI$: `${__dirname}/src/serverAPI.js`,
       constants$: `${__dirname}/src/constants.js`,
       utils$: `${__dirname}/src/utils.js`,
+      connect$: `${__dirname}/src/connect.js`,
       AppContext$: `${__dirname}/src/AppContext.js`,
     },
   },

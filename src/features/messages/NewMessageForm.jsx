@@ -1,16 +1,15 @@
 import React, { useContext } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
 
 import serverAPI from 'serverAPI';
-import { showModal } from 'features/modals/modalsSlice';
 import AppContext from 'AppContext';
+import connect from 'connect';
 import { validateMessageText } from 'utils';
 import { getCurrentChannelId } from 'features/channels/channelsSlice';
 
-const actions = { openModal: showModal };
 
 const NewMessageForm = (props) => {
   const { username } = useContext(AppContext);
@@ -57,4 +56,4 @@ const NewMessageForm = (props) => {
   );
 };
 
-export default connect(null, actions)(NewMessageForm);
+export default connect(NewMessageForm);
